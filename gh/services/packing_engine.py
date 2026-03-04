@@ -46,6 +46,9 @@ def pack_rooms(boundary, rooms):
     for room in rooms:
         assign_dimensions(room)
 
+    # Sort rooms by area descending (better packing behavior)
+    rooms.sort(key=lambda r: r.area(), reverse=True)
+
     packer = newPacker(rotation=False)
 
     # Add boundary as bin
