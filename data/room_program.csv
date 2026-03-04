@@ -1,0 +1,8 @@
+Name,Type,Category,Target Area,Minimum Area
+living_room,living,common,25.0,20.0
+kitchen,kitchen,common,12.0,9.0
+bedroom_1,bedroom,private,14.0,12.0
+bedroom_2,bedroom,private,12.0,10.0
+bathroom_1,bathroom,private,5.0,4.0
+bathroom_2,bathroom,private,4.0,3.5
+circulation,circulation,common,8.0,5.0
