@@ -1,3 +1,27 @@
+const tooltip = document.getElementById("tooltip");
+
+function showTooltip(html, event) {
+
+    tooltip.innerHTML = html;
+    tooltip.style.opacity = 1;
+
+    moveTooltip(event);
+
+}
+
+function moveTooltip(event) {
+
+    tooltip.style.left = event.pageX + 12 + "px";
+    tooltip.style.top = event.pageY + 12 + "px";
+
+}
+
+function hideTooltip() {
+
+    tooltip.style.opacity = 0;
+
+}
+
 async function loadLayout() {
 
     let data;
@@ -79,36 +103,29 @@ function renderLayout(data) {
         rect.classList.add("room");
         rect.classList.add(room.category);
 
-        const tooltip = document.getElementById("tooltip");
-
         rect.addEventListener("mouseover", (event) => {
         
             rect.style.strokeWidth = 4;
         
-            tooltip.style.opacity = 1;
-        
-            tooltip.innerHTML = `
+            showTooltip(`
                 <strong>${room.name}</strong>
                 <hr>
                 Area: ${room.computed_area} m²<br>
                 Target: ${room.target_area} m²<br>
                 Minimum: ${room.minimum_area} m²
-            `;
+            `, event);
         
         });
+
         
-        rect.addEventListener("mousemove", (event) => {
         
-            tooltip.style.left = event.pageX + 12 + "px";
-            tooltip.style.top = event.pageY + 12 + "px";
-        
-        });
+        rect.addEventListener("mousemove", moveTooltip);
         
         rect.addEventListener("mouseout", () => {
         
             rect.style.strokeWidth = 1;
         
-            tooltip.style.opacity = 0;
+            hideTooltip();
         
         });
 
@@ -143,7 +160,6 @@ function renderLayout(data) {
 
 }
 
-
 function renderMetrics(data) {
 
     const metrics = data.metrics;
@@ -153,36 +169,154 @@ function renderMetrics(data) {
     const container = document.getElementById("metrics");
 
     container.innerHTML = `
-        <h3>Boundary</h3>
+
+    <h3>Boundary</h3>
         <hr>
-        <p class="metric-label"><strong>Boundary Dimensions:</strong> ${boundary.width.toFixed(2)} m x ${boundary.height.toFixed(2)} m</p>
-        <p><strong>Gross Floor Area:</strong> ${metrics.gross_floor_area.toFixed(2)} m²</p>
-<br>
-<br>
-        <h3>Metrics</h3>
-        <hr>
-        <p><strong>Net Floor Area:</strong> ${metrics.net_floor_area.toFixed(2)} m²</p>
-        <p><strong>Private Area:</strong> ${metrics.private_area.toFixed(2)} m²</p>
-        <p><strong>Common Area:</strong> ${metrics.common_area.toFixed(2)} m²</p>
-<br>
-        <p><strong>Packing Efficiency:</strong> ${(metrics.packing_efficiency * 100).toFixed(2)}%</p>
-<br>
-        <p><strong>Private Ratio:</strong> ${(metrics.private_ratio * 100).toFixed(2)}%</p>
-        <p><strong>Common Ratio:</strong> ${(metrics.common_ratio * 100).toFixed(2)}%</p>
-<br>
-<br>
+    
+    <p>
+    <strong>Boundary Width</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Description</strong><br>
+        Width of the rectangular boundary drawn in Rhino.">ℹ
+        </span>
+        : ${data.boundary.width.toFixed(2)} m
+    </p>
 
 
-        <h3>Solver Decision</h3>
-        <hr>
-        <p><strong>Program Profile:</strong> ${solver.selected_profile}</p>
-        <p><strong>Rotation Allowed:</strong> ${solver.rotation}</p>
-        <p><strong>Sort Strategy:</strong> ${solver.sort_strategy}</p>
-        <p><strong>Variants Evaluated:</strong> ${solver.variants_tested}</p>
+    <p>
+    <strong>Boundary Height</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Description</strong><br>
+        Height of the rectangular boundary drawn in Rhino.">ℹ
+        </span>
+    : ${data.boundary.height.toFixed(2)} m
+    </p>
 
+    <p>
+    <strong>Gross Floor Area</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Boundary width × Boundary height
+        ">
+        ℹ
+        </span>
+    : ${metrics.gross_floor_area.toFixed(2)} m²
+    </p>
+    
+
+    <br>
+    <br>
+    
+    <h3>Metrics</h3>
+    <hr>
+    <p>
+    <strong>Net Floor Area</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Sum of all room areas from generated geometry.
+        ">
+        ℹ
+        </span>
+    : ${metrics.net_floor_area.toFixed(2)} m²
+    </p>
+    
+    <p>
+    <strong>Private Area</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Sum of room areas where category = private.
+        ">
+        ℹ
+        </span>
+    : ${metrics.private_area.toFixed(2)} m²
+    </p>
+    
+    <p>
+    <strong>Common Area</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Sum of room areas where category = common.
+        ">
+        ℹ
+        </span>
+    : ${metrics.common_area.toFixed(2)} m²
+    </p>
+    
+    <p>
+        <strong>Packing Efficiency</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Net Floor Area ÷ Gross Floor Area<br><br>
+        <strong>Description</strong><br>
+        Measures how efficiently the boundary space is used.
+        ">
+        ℹ
+        </span>
+        : ${(metrics.packing_efficiency * 100).toFixed(2)} %
+    </p>
+    
+    <p>
+    <strong>Private Ratio</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Private Area ÷ Net Floor Area
+        ">
+        ℹ
+        </span>
+    : ${(metrics.private_ratio * 100).toFixed(2)} %
+    </p>
+    
+    <p>
+    <strong>Common Ratio</strong>
+        <span class="info-icon"
+        data-tooltip="
+        <strong>Formula</strong><br>
+        Common Area ÷ Net Floor Area
+        ">
+        ℹ
+        </span>
+    : ${(metrics.common_ratio * 100).toFixed(2)} %
+    </p>
+    
+
+    <br>
+    <br>
+
+    <h3>Solver Decision</h3>
+        <hr>
+    <p><strong>Program Profile:</strong> ${solver.selected_profile}</p>
+    <p><strong>Rotation Allowed:</strong> ${solver.rotation}</p>
+    <p><strong>Sort Strategy:</strong> ${solver.sort_strategy}</p>
+    <p><strong>Variants Evaluated:</strong> ${solver.variants_tested}</p>
+    
     `;
 
-}
+    container.querySelectorAll(".info-icon").forEach(icon => {
 
+        icon.addEventListener("mouseover", (event) => {
+
+            showTooltip(icon.dataset.tooltip, event);
+
+        });
+
+        icon.addEventListener("mousemove", moveTooltip);
+
+        icon.addEventListener("mouseleave", () => {
+
+            hideTooltip();
+
+        });
+
+    });
+
+}
 
 loadLayout();
