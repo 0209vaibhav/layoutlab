@@ -21,15 +21,16 @@ Layout JSON Export
 Web Dashboard Visualization
 ```
 
-The boundary is defined in **Rhino**, and the packing engine computes the layout dynamically whenever the boundary changes.
+The boundary can be defined either as a rectangle drawn in **Rhino** (referenced in Grasshopper) or directly inside **Grasshopper** using a rectangle component driven by sliders.
+In both cases, the packing engine computes the layout dynamically whenever the boundary dimensions change.
 
 ---
 
 ## Quick Preview
 
-1. Open `web/index.html`
-2. The viewer loads a sample layout (`demo_layout.json`)
-3. To generate a new layout, run the solver in **Rhino + Grasshopper**
+1. Open `web/index.html` in a browser.
+2. The viewer first attempts to load `exports/layout.json`; if none is found, it falls back to a sample layout (`web/demo_layout.json`).
+3. To generate a new layout, run the solver in **Rhino + Grasshopper** so it writes `exports/layout.json`, then refresh the browser.
 
 ---
 
@@ -200,13 +201,18 @@ Converts the layout into a structured JSON format.
 
 ### Grasshopper Integration
 
-Grasshopper acts as the **geometry interface**.
+Grasshopper acts as the **geometry interface**, and supports two boundary workflows:
 
-1. User draws a rectangular boundary in Rhino.
-2. GH extracts boundary dimensions.
-3. Python solver packs rooms inside the boundary.
-4. Layout is exported as JSON.
-5. The web viewer updates automatically.
+- **Option A – Rhino‑driven boundary**
+  1. User draws a rectangular boundary in Rhino.
+  2. Grasshopper references this rectangle and extracts its dimensions.
+  3. The Python solver packs rooms inside the referenced boundary.
+
+- **Option B – Grasshopper‑driven boundary**
+  1. A Grasshopper rectangle component defines the boundary.
+  2. Boundary width/height are controlled directly via sliders in Grasshopper (no Rhino rectangle required).
+
+In both cases, the solver exports `exports/layout.json`, and the web viewer reads that JSON to update automatically.
 
 ---
 
@@ -255,9 +261,11 @@ The project currently requires:
 
 ### 2. Launch Rhino + Grasshopper
 
-1. Open Rhino
-2. Load the Grasshopper definition
-3. Draw a rectangular boundary
+1. Open Rhino.
+2. Load the Grasshopper definition.
+3. Choose one of the boundary workflows:
+   - Draw a rectangular boundary in Rhino and reference it in Grasshopper, **or**
+   - Use the built‑in Grasshopper rectangle component and control its dimensions via sliders.
 
 ---
 
@@ -265,10 +273,10 @@ The project currently requires:
 
 Grasshopper executes the Python solver which:
 
-1. Reads `room_program.csv`
-2. Packs the rooms
-3. Computes metrics
-4. Exports `layout.json`
+1. Reads `room_program.csv`.
+2. Packs the rooms inside the current boundary (from Rhino or Grasshopper).
+3. Computes metrics.
+4. Exports `exports/layout.json`.
 
 ---
 
@@ -280,7 +288,7 @@ Open:
 web/index.html
 ```
 
-The dashboard reads the exported JSON and visualizes the layout.
+The dashboard reads `exports/layout.json` if present, and otherwise falls back to `web/demo_layout.json`, then visualizes the layout.
 
 ---
 
@@ -319,8 +327,11 @@ Future improvements could include:
 
 # AI-Assisted Development
 
-AI tools were used to assist with code iteration, debugging, and architectural exploration during development.
-All final code and design decisions were reviewed and refined manually.
+AI was used extensively throughout this project for **briefing, iteration, and refinement**.
+I first used ChatGPT to digest the brief PDF shared by the Cedar team, clarify requirements, map out the end‑to‑end workflow, and generate step‑by‑step implementation plans.
+ChatGPT also supported debugging, refactoring, data‑schema design, and early UI/UX and visualization ideas for the web dashboard.
+Later in the process, I used Cursor’s AI capabilities primarily for **fast, minimal web UI/UX changes** and small code edits while keeping the overall architecture and design decisions under my own control.
+All final code and documentation were reviewed and adjusted manually to ensure they matched the intended behavior and design goals.
 
 ---
 

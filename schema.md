@@ -15,6 +15,12 @@ The exported JSON contains four main sections:
 # 1. Boundary
 
 The boundary describes the rectangular container in which rooms are packed.
+In the Rhino + Grasshopper implementation this boundary can come from either:
+
+- A rectangle drawn in Rhino and referenced into Grasshopper, or  
+- A Grasshopper rectangle component driven by sliders.
+
+Regardless of how it is created, the exported JSON only encodes the **width** and **height** of this rectangle; downstream tools do not need to know whether it originated in Rhino or Grasshopper.
 
 ```json
 "boundary": {
