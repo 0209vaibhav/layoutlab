@@ -297,9 +297,13 @@ function renderLayout(data) {
             showTooltip(`
                 <strong>${room.name}</strong>
                 <hr>
+                Width: ${room.geometry.width.toFixed(2)} m<br>
+                Height: ${room.geometry.height.toFixed(2)} m
+<br><br>
                 Area: ${room.computed_area} m²<br>
-                Target: ${room.target_area} m²<br>
-                Minimum: ${room.minimum_area} m²
+                Target area: ${room.target_area} m²<br>
+                Minimum area: ${room.minimum_area} m²<br>
+
             `, event);
         
         });
