@@ -9,6 +9,7 @@ let panStartX = 0;
 let panStartY = 0;
 let panOriginX = 0;
 let panOriginY = 0;
+let currentLayoutData = null;
 
 function showTooltip(html, event) {
 
@@ -353,7 +354,7 @@ async function loadLayout() {
 }
 
 function renderLayout(data) {
-
+    currentLayoutData = data;
     const svg = document.getElementById("floorplan");
 
     // Clear previous render
@@ -370,8 +371,14 @@ function renderLayout(data) {
     svg.setAttribute("width", svgWidth);
     svg.setAttribute("height", svgHeight);
 
-    // Auto-fit scale
-    const scale = 50;   // try 40–80 depending on zoom
+    // Auto-fit scale so layout fits inside canvas
+
+    const padding = 20;
+
+    const scaleX = (svgWidth - padding * 2) / boundaryWidth;
+    const scaleY = (svgHeight - padding * 2) / boundaryHeight;
+
+    const scale = Math.min(scaleX, scaleY);
 
     // Center layout
     const offsetX = (svgWidth - boundaryWidth * scale) / 2;
@@ -385,7 +392,7 @@ function renderLayout(data) {
 
     const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
     group.setAttribute("id", "floorplan-group");
-
+    
     // Draw boundary
     const boundaryRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
@@ -630,6 +637,14 @@ function renderMetrics(data) {
     });
 
 }
+
+window.addEventListener("resize", () => {
+
+    if (currentLayoutData) {
+        renderLayout(currentLayoutData);
+    }
+
+});
 
 setupCanvasInteractions();
 setupLegendInteractions();

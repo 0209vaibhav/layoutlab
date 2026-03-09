@@ -99,6 +99,10 @@ body {
     display: block;
 }
 
+#floorplan-group {
+    transition: transform 0.35s ease;
+}
+
 /* Cards */
 
 .card {
