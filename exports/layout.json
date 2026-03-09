@@ -1,8 +1,8 @@
 {
     "boundary": {
-        "width": 10.8,
+        "width": 25.0,
         "height": 10.0,
-        "area": 108.0
+        "area": 250.0
     },
     "variants": [
         {
@@ -10,13 +10,13 @@
             "profile": "compact",
             "rotation": false,
             "sort_strategy": "area_desc",
-            "efficiency": 0.5879629629629629,
+            "efficiency": 0.254,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 63.5,
                 "private_area": 29.5,
                 "common_area": 34.0,
-                "packing_efficiency": 0.5879629629629629,
+                "packing_efficiency": 0.254,
                 "private_ratio": 0.4645669291338583,
                 "common_ratio": 0.5354330708661418
             },
@@ -46,8 +46,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 5.65685424949238,
-                            "y": 0
+                            "x": 0,
+                            "y": 3.5355339059327378
                         },
                         "width": 3.794733192202055,
                         "height": 3.1622776601683795
@@ -62,8 +62,8 @@
                     "computed_area": 10.0,
                     "geometry": {
                         "origin": {
-                            "x": 5.65685424949238,
-                            "y": 3.1622776601683795
+                            "x": 0,
+                            "y": 6.697811566101118
                         },
                         "width": 3.4641016151377544,
                         "height": 2.886751345948129
@@ -78,8 +78,8 @@
                     "computed_area": 9.0,
                     "geometry": {
                         "origin": {
-                            "x": 0,
-                            "y": 6.049029006116509
+                            "x": 3.4641016151377544,
+                            "y": 6.697811566101118
                         },
                         "width": 3.420526275297414,
                         "height": 2.6311740579210876
@@ -94,7 +94,7 @@
                     "computed_area": 5.0,
                     "geometry": {
                         "origin": {
-                            "x": 0,
+                            "x": 3.794733192202055,
                             "y": 3.5355339059327378
                         },
                         "width": 3.162277660168379,
@@ -110,8 +110,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.420526275297414,
-                            "y": 3.5355339059327378
+                            "x": 5.65685424949238,
+                            "y": 0
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -126,8 +126,8 @@
                     "computed_area": 3.5,
                     "geometry": {
                         "origin": {
-                            "x": 3.420526275297414,
-                            "y": 5.643719012711657
+                            "x": 6.884627890435168,
+                            "y": 5.116672736016928
                         },
                         "width": 1.7748239349298849,
                         "height": 1.9720265943665387
@@ -140,13 +140,13 @@
             "profile": "compact",
             "rotation": true,
             "sort_strategy": "area_desc",
-            "efficiency": 0.5879629629629629,
+            "efficiency": 0.254,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 63.5,
                 "private_area": 29.5,
                 "common_area": 34.0,
-                "packing_efficiency": 0.5879629629629629,
+                "packing_efficiency": 0.254,
                 "private_ratio": 0.4645669291338583,
                 "common_ratio": 0.5354330708661418
             },
@@ -208,7 +208,7 @@
                     "computed_area": 9.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.049029006116509,
+                            "x": 3.5355339059327378,
                             "y": 0
                         },
                         "width": 3.420526275297414,
@@ -225,7 +225,7 @@
                     "geometry": {
                         "origin": {
                             "x": 3.5355339059327378,
-                            "y": 0
+                            "y": 3.420526275297414
                         },
                         "width": 3.162277660168379,
                         "height": 1.5811388300841898
@@ -240,8 +240,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.5355339059327378,
-                            "y": 3.162277660168379
+                            "x": 6.166707963853826,
+                            "y": 0
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -256,8 +256,8 @@
                     "computed_area": 3.5,
                     "geometry": {
                         "origin": {
-                            "x": 5.432900502033766,
-                            "y": 2.6311740579210876
+                            "x": 6.049029006116509,
+                            "y": 5.001665105381604
                         },
                         "width": 1.7748239349298849,
                         "height": 1.9720265943665387
@@ -270,13 +270,13 @@
             "profile": "compact",
             "rotation": false,
             "sort_strategy": "area_asc",
-            "efficiency": 0.5879629629629629,
+            "efficiency": 0.254,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 63.5,
                 "private_area": 29.5,
                 "common_area": 34.0,
-                "packing_efficiency": 0.5879629629629629,
+                "packing_efficiency": 0.254,
                 "private_ratio": 0.4645669291338583,
                 "common_ratio": 0.5354330708661418
             },
@@ -290,8 +290,8 @@
                     "computed_area": 3.5,
                     "geometry": {
                         "origin": {
-                            "x": 3.420526275297414,
-                            "y": 5.643719012711657
+                            "x": 6.884627890435168,
+                            "y": 5.116672736016928
                         },
                         "width": 1.7748239349298849,
                         "height": 1.9720265943665387
@@ -306,8 +306,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.420526275297414,
-                            "y": 3.5355339059327378
+                            "x": 5.65685424949238,
+                            "y": 0
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -322,7 +322,7 @@
                     "computed_area": 5.0,
                     "geometry": {
                         "origin": {
-                            "x": 0,
+                            "x": 3.794733192202055,
                             "y": 3.5355339059327378
                         },
                         "width": 3.162277660168379,
@@ -338,8 +338,8 @@
                     "computed_area": 9.0,
                     "geometry": {
                         "origin": {
-                            "x": 0,
-                            "y": 6.049029006116509
+                            "x": 3.4641016151377544,
+                            "y": 6.697811566101118
                         },
                         "width": 3.420526275297414,
                         "height": 2.6311740579210876
@@ -354,8 +354,8 @@
                     "computed_area": 10.0,
                     "geometry": {
                         "origin": {
-                            "x": 5.65685424949238,
-                            "y": 3.1622776601683795
+                            "x": 0,
+                            "y": 6.697811566101118
                         },
                         "width": 3.4641016151377544,
                         "height": 2.886751345948129
@@ -370,8 +370,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 5.65685424949238,
-                            "y": 0
+                            "x": 0,
+                            "y": 3.5355339059327378
                         },
                         "width": 3.794733192202055,
                         "height": 3.1622776601683795
@@ -400,13 +400,13 @@
             "profile": "compact",
             "rotation": true,
             "sort_strategy": "area_asc",
-            "efficiency": 0.5879629629629629,
+            "efficiency": 0.254,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 63.5,
                 "private_area": 29.5,
                 "common_area": 34.0,
-                "packing_efficiency": 0.5879629629629629,
+                "packing_efficiency": 0.254,
                 "private_ratio": 0.4645669291338583,
                 "common_ratio": 0.5354330708661418
             },
@@ -420,8 +420,8 @@
                     "computed_area": 3.5,
                     "geometry": {
                         "origin": {
-                            "x": 5.432900502033766,
-                            "y": 2.6311740579210876
+                            "x": 6.049029006116509,
+                            "y": 5.001665105381604
                         },
                         "width": 1.7748239349298849,
                         "height": 1.9720265943665387
@@ -436,8 +436,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.5355339059327378,
-                            "y": 3.162277660168379
+                            "x": 6.166707963853826,
+                            "y": 0
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -453,7 +453,7 @@
                     "geometry": {
                         "origin": {
                             "x": 3.5355339059327378,
-                            "y": 0
+                            "y": 3.420526275297414
                         },
                         "width": 3.162277660168379,
                         "height": 1.5811388300841898
@@ -468,7 +468,7 @@
                     "computed_area": 9.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.049029006116509,
+                            "x": 3.5355339059327378,
                             "y": 0
                         },
                         "width": 3.420526275297414,
@@ -530,13 +530,13 @@
             "profile": "balanced",
             "rotation": false,
             "sort_strategy": "area_desc",
-            "efficiency": 0.6643518518518519,
+            "efficiency": 0.287,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 71.75,
                 "private_area": 32.25,
                 "common_area": 39.5,
-                "packing_efficiency": 0.6643518518518519,
+                "packing_efficiency": 0.287,
                 "private_ratio": 0.44947735191637633,
                 "common_ratio": 0.5505226480836237
             },
@@ -566,8 +566,8 @@
                     "computed_area": 13.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.0,
-                            "y": 0
+                            "x": 0,
+                            "y": 3.75
                         },
                         "width": 3.9496835316262997,
                         "height": 3.2914029430219167
@@ -582,8 +582,8 @@
                     "computed_area": 11.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.0,
-                            "y": 3.2914029430219167
+                            "x": 3.9496835316262997,
+                            "y": 3.75
                         },
                         "width": 3.63318042491699,
                         "height": 3.0276503540974917
@@ -599,7 +599,7 @@
                     "geometry": {
                         "origin": {
                             "x": 0,
-                            "y": 6.319053297119408
+                            "y": 7.041402943021916
                         },
                         "width": 3.6945906403822333,
                         "height": 2.8419928002940256
@@ -614,8 +614,8 @@
                     "computed_area": 6.5,
                     "geometry": {
                         "origin": {
-                            "x": 0,
-                            "y": 3.75
+                            "x": 3.6945906403822333,
+                            "y": 7.041402943021916
                         },
                         "width": 3.6055512754639896,
                         "height": 1.8027756377319946
@@ -630,8 +630,8 @@
                     "computed_area": 4.5,
                     "geometry": {
                         "origin": {
-                            "x": 3.6945906403822333,
-                            "y": 3.75
+                            "x": 7.300141915846223,
+                            "y": 6.777650354097492
                         },
                         "width": 2.0124611797498106,
                         "height": 2.23606797749979
@@ -646,8 +646,8 @@
                     "computed_area": 3.75,
                     "geometry": {
                         "origin": {
-                            "x": 3.6945906403822333,
-                            "y": 5.98606797749979
+                            "x": 6.0,
+                            "y": 0
                         },
                         "width": 1.8371173070873834,
                         "height": 2.041241452319315
@@ -660,13 +660,13 @@
             "profile": "balanced",
             "rotation": true,
             "sort_strategy": "area_desc",
-            "efficiency": 0.6643518518518519,
+            "efficiency": 0.287,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 71.75,
                 "private_area": 32.25,
                 "common_area": 39.5,
-                "packing_efficiency": 0.6643518518518519,
+                "packing_efficiency": 0.287,
                 "private_ratio": 0.44947735191637633,
                 "common_ratio": 0.5505226480836237
             },
@@ -728,7 +728,7 @@
                     "computed_area": 10.5,
                     "geometry": {
                         "origin": {
-                            "x": 6.319053297119408,
+                            "x": 3.75,
                             "y": 0
                         },
                         "width": 3.6945906403822333,
@@ -745,7 +745,7 @@
                     "geometry": {
                         "origin": {
                             "x": 3.75,
-                            "y": 0
+                            "y": 3.6945906403822333
                         },
                         "width": 3.6055512754639896,
                         "height": 1.8027756377319946
@@ -760,8 +760,8 @@
                     "computed_area": 4.5,
                     "geometry": {
                         "origin": {
-                            "x": 3.75,
-                            "y": 3.6055512754639896
+                            "x": 6.591992800294026,
+                            "y": 0
                         },
                         "width": 2.0124611797498106,
                         "height": 2.23606797749979
@@ -776,8 +776,8 @@
                     "computed_area": 3.75,
                     "geometry": {
                         "origin": {
-                            "x": 5.762461179749811,
-                            "y": 2.8419928002940256
+                            "x": 6.319053297119408,
+                            "y": 5.497366278114228
                         },
                         "width": 1.8371173070873834,
                         "height": 2.041241452319315
@@ -790,13 +790,13 @@
             "profile": "balanced",
             "rotation": false,
             "sort_strategy": "area_asc",
-            "efficiency": 0.6643518518518519,
+            "efficiency": 0.287,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 71.75,
                 "private_area": 32.25,
                 "common_area": 39.5,
-                "packing_efficiency": 0.6643518518518519,
+                "packing_efficiency": 0.287,
                 "private_ratio": 0.44947735191637633,
                 "common_ratio": 0.5505226480836237
             },
@@ -810,8 +810,8 @@
                     "computed_area": 3.75,
                     "geometry": {
                         "origin": {
-                            "x": 3.6945906403822333,
-                            "y": 5.98606797749979
+                            "x": 6.0,
+                            "y": 0
                         },
                         "width": 1.8371173070873834,
                         "height": 2.041241452319315
@@ -826,8 +826,8 @@
                     "computed_area": 4.5,
                     "geometry": {
                         "origin": {
-                            "x": 3.6945906403822333,
-                            "y": 3.75
+                            "x": 7.300141915846223,
+                            "y": 6.777650354097492
                         },
                         "width": 2.0124611797498106,
                         "height": 2.23606797749979
@@ -842,8 +842,8 @@
                     "computed_area": 6.5,
                     "geometry": {
                         "origin": {
-                            "x": 0,
-                            "y": 3.75
+                            "x": 3.6945906403822333,
+                            "y": 7.041402943021916
                         },
                         "width": 3.6055512754639896,
                         "height": 1.8027756377319946
@@ -859,7 +859,7 @@
                     "geometry": {
                         "origin": {
                             "x": 0,
-                            "y": 6.319053297119408
+                            "y": 7.041402943021916
                         },
                         "width": 3.6945906403822333,
                         "height": 2.8419928002940256
@@ -874,8 +874,8 @@
                     "computed_area": 11.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.0,
-                            "y": 3.2914029430219167
+                            "x": 3.9496835316262997,
+                            "y": 3.75
                         },
                         "width": 3.63318042491699,
                         "height": 3.0276503540974917
@@ -890,8 +890,8 @@
                     "computed_area": 13.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.0,
-                            "y": 0
+                            "x": 0,
+                            "y": 3.75
                         },
                         "width": 3.9496835316262997,
                         "height": 3.2914029430219167
@@ -920,13 +920,13 @@
             "profile": "balanced",
             "rotation": true,
             "sort_strategy": "area_asc",
-            "efficiency": 0.6643518518518519,
+            "efficiency": 0.287,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 71.75,
                 "private_area": 32.25,
                 "common_area": 39.5,
-                "packing_efficiency": 0.6643518518518519,
+                "packing_efficiency": 0.287,
                 "private_ratio": 0.44947735191637633,
                 "common_ratio": 0.5505226480836237
             },
@@ -940,8 +940,8 @@
                     "computed_area": 3.75,
                     "geometry": {
                         "origin": {
-                            "x": 5.762461179749811,
-                            "y": 2.8419928002940256
+                            "x": 6.319053297119408,
+                            "y": 5.497366278114228
                         },
                         "width": 1.8371173070873834,
                         "height": 2.041241452319315
@@ -956,8 +956,8 @@
                     "computed_area": 4.5,
                     "geometry": {
                         "origin": {
-                            "x": 3.75,
-                            "y": 3.6055512754639896
+                            "x": 6.591992800294026,
+                            "y": 0
                         },
                         "width": 2.0124611797498106,
                         "height": 2.23606797749979
@@ -973,7 +973,7 @@
                     "geometry": {
                         "origin": {
                             "x": 3.75,
-                            "y": 0
+                            "y": 3.6945906403822333
                         },
                         "width": 3.6055512754639896,
                         "height": 1.8027756377319946
@@ -988,7 +988,7 @@
                     "computed_area": 10.5,
                     "geometry": {
                         "origin": {
-                            "x": 6.319053297119408,
+                            "x": 3.75,
                             "y": 0
                         },
                         "width": 3.6945906403822333,
@@ -1050,13 +1050,13 @@
             "profile": "generous",
             "rotation": false,
             "sort_strategy": "area_desc",
-            "efficiency": 0.7407407407407407,
+            "efficiency": 0.32,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 80.0,
                 "private_area": 35.0,
                 "common_area": 45.0,
-                "packing_efficiency": 0.7407407407407407,
+                "packing_efficiency": 0.32,
                 "private_ratio": 0.4375,
                 "common_ratio": 0.5625
             },
@@ -1086,8 +1086,8 @@
                     "computed_area": 14.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.324555320336759,
-                            "y": 0
+                            "x": 0,
+                            "y": 3.952847075210474
                         },
                         "width": 4.098780306383839,
                         "height": 3.4156502553198664
@@ -1102,8 +1102,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.324555320336759,
-                            "y": 3.4156502553198664
+                            "x": 4.098780306383839,
+                            "y": 3.952847075210474
                         },
                         "width": 3.9496835316263,
                         "height": 3.0382181012509997
@@ -1118,8 +1118,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 0,
-                            "y": 6.453868356570866
+                            "x": 6.324555320336759,
+                            "y": 0
                         },
                         "width": 3.794733192202055,
                         "height": 3.1622776601683795
@@ -1135,7 +1135,7 @@
                     "geometry": {
                         "origin": {
                             "x": 0,
-                            "y": 3.952847075210474
+                            "y": 7.3684973305303405
                         },
                         "width": 4.0,
                         "height": 2.0
@@ -1151,7 +1151,7 @@
                     "geometry": {
                         "origin": {
                             "x": 4.0,
-                            "y": 3.952847075210474
+                            "y": 7.3684973305303405
                         },
                         "width": 2.1213203435596424,
                         "height": 2.3570226039551585
@@ -1166,8 +1166,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.794733192202055,
-                            "y": 6.309869679165633
+                            "x": 6.121320343559642,
+                            "y": 6.991065176461474
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -1180,13 +1180,13 @@
             "profile": "generous",
             "rotation": true,
             "sort_strategy": "area_desc",
-            "efficiency": 0.7407407407407407,
+            "efficiency": 0.32,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 80.0,
                 "private_area": 35.0,
                 "common_area": 45.0,
-                "packing_efficiency": 0.7407407407407407,
+                "packing_efficiency": 0.32,
                 "private_ratio": 0.4375,
                 "common_ratio": 0.5625
             },
@@ -1248,8 +1248,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.991065176461474,
-                            "y": 0
+                            "x": 4.098780306383839,
+                            "y": 3.9496835316263
                         },
                         "width": 3.794733192202055,
                         "height": 3.1622776601683795
@@ -1264,8 +1264,8 @@
                     "computed_area": 8.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.952847075210474,
-                            "y": 3.9496835316263
+                            "x": 4.098780306383839,
+                            "y": 7.744416723828355
                         },
                         "width": 4.0,
                         "height": 2.0
@@ -1280,8 +1280,8 @@
                     "computed_area": 5.0,
                     "geometry": {
                         "origin": {
-                            "x": 7.9528470752104745,
-                            "y": 3.1622776601683795
+                            "x": 6.991065176461474,
+                            "y": 0
                         },
                         "width": 2.1213203435596424,
                         "height": 2.3570226039551585
@@ -1296,8 +1296,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 7.9528470752104745,
-                            "y": 5.283598003728022
+                            "x": 7.261057966552219,
+                            "y": 2.3570226039551585
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -1310,13 +1310,13 @@
             "profile": "generous",
             "rotation": false,
             "sort_strategy": "area_asc",
-            "efficiency": 0.7407407407407407,
+            "efficiency": 0.32,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 80.0,
                 "private_area": 35.0,
                 "common_area": 45.0,
-                "packing_efficiency": 0.7407407407407407,
+                "packing_efficiency": 0.32,
                 "private_ratio": 0.4375,
                 "common_ratio": 0.5625
             },
@@ -1330,8 +1330,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.794733192202055,
-                            "y": 6.309869679165633
+                            "x": 6.121320343559642,
+                            "y": 6.991065176461474
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -1347,7 +1347,7 @@
                     "geometry": {
                         "origin": {
                             "x": 4.0,
-                            "y": 3.952847075210474
+                            "y": 7.3684973305303405
                         },
                         "width": 2.1213203435596424,
                         "height": 2.3570226039551585
@@ -1363,7 +1363,7 @@
                     "geometry": {
                         "origin": {
                             "x": 0,
-                            "y": 3.952847075210474
+                            "y": 7.3684973305303405
                         },
                         "width": 4.0,
                         "height": 2.0
@@ -1378,8 +1378,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.324555320336759,
-                            "y": 3.4156502553198664
+                            "x": 4.098780306383839,
+                            "y": 3.952847075210474
                         },
                         "width": 3.9496835316263,
                         "height": 3.0382181012509997
@@ -1394,8 +1394,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 0,
-                            "y": 6.453868356570866
+                            "x": 6.324555320336759,
+                            "y": 0
                         },
                         "width": 3.794733192202055,
                         "height": 3.1622776601683795
@@ -1410,8 +1410,8 @@
                     "computed_area": 14.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.324555320336759,
-                            "y": 0
+                            "x": 0,
+                            "y": 3.952847075210474
                         },
                         "width": 4.098780306383839,
                         "height": 3.4156502553198664
@@ -1440,13 +1440,13 @@
             "profile": "generous",
             "rotation": true,
             "sort_strategy": "area_asc",
-            "efficiency": 0.7407407407407407,
+            "efficiency": 0.32,
             "metrics": {
-                "gross_floor_area": 108.0,
+                "gross_floor_area": 250.0,
                 "net_floor_area": 80.0,
                 "private_area": 35.0,
                 "common_area": 45.0,
-                "packing_efficiency": 0.7407407407407407,
+                "packing_efficiency": 0.32,
                 "private_ratio": 0.4375,
                 "common_ratio": 0.5625
             },
@@ -1460,8 +1460,8 @@
                     "computed_area": 4.0,
                     "geometry": {
                         "origin": {
-                            "x": 7.9528470752104745,
-                            "y": 5.283598003728022
+                            "x": 7.261057966552219,
+                            "y": 2.3570226039551585
                         },
                         "width": 1.8973665961010275,
                         "height": 2.1081851067789197
@@ -1476,8 +1476,8 @@
                     "computed_area": 5.0,
                     "geometry": {
                         "origin": {
-                            "x": 7.9528470752104745,
-                            "y": 3.1622776601683795
+                            "x": 6.991065176461474,
+                            "y": 0
                         },
                         "width": 2.1213203435596424,
                         "height": 2.3570226039551585
@@ -1492,8 +1492,8 @@
                     "computed_area": 8.0,
                     "geometry": {
                         "origin": {
-                            "x": 3.952847075210474,
-                            "y": 3.9496835316263
+                            "x": 4.098780306383839,
+                            "y": 7.744416723828355
                         },
                         "width": 4.0,
                         "height": 2.0
@@ -1524,8 +1524,8 @@
                     "computed_area": 12.0,
                     "geometry": {
                         "origin": {
-                            "x": 6.991065176461474,
-                            "y": 0
+                            "x": 4.098780306383839,
+                            "y": 3.9496835316263
                         },
                         "width": 3.794733192202055,
                         "height": 3.1622776601683795
