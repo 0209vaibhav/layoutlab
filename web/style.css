@@ -241,3 +241,77 @@ body {
     color: #888;
     font-size: 13px;
 }
+
+/* ---------------------------
+VARIANT PANEL (RIGHT SIDE)
+--------------------------- */
+
+.variant-panel {
+    width: 275px;
+    flex-shrink: 0;
+    border: 1px solid rgb(200,200,200);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.variant-panel h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#variant-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.variant-order {
+    font-size: 12px;
+    color: #575757;
+    margin-top: 2px;
+}
+
+.variant-thumb {
+    border: 1px solid #ccc;
+    padding: 6px;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.variant-thumb:hover {
+    border: 2px solid rgba(0, 0, 0, 0.35);
+}
+
+.variant-thumb svg {
+    background: #fafafa;
+}
+
+.variant-thumb.selected {
+    border: 2px solid #000000;
+}
+
+.variant-panel {
+    max-height: calc(100vh - 120px);
+}
+
+.variant-rank {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.variant-eff {
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.best-star {
+    margin-left: 6px;
+    font-size: 13px;
+    font-weight: bold;
+}

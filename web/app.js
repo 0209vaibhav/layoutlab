@@ -202,6 +202,109 @@ function setupLegendInteractions() {
 
 }
 
+function renderVariants(data) {
+
+    const container = document.getElementById("variant-grid");
+
+    if (!data.variants) return;
+
+    const variants = [...data.variants];
+
+    // Sort by efficiency (best first)
+    variants.sort((a, b) => b.efficiency - a.efficiency);
+
+    container.innerHTML = "";
+
+    variants.forEach((variant, index) => {
+
+        const div = document.createElement("div");
+        div.classList.add("variant-thumb");
+        
+        if (index === 0) {
+            div.classList.add("selected");
+        }
+
+        const thumbWidth = 160;
+        const thumbHeight = 100;
+        const scale = Math.min(
+            thumbWidth / data.boundary.width,
+            thumbHeight / data.boundary.height
+        );
+        
+        let roomsSvg = "";
+        
+        variant.rooms.forEach(room => {
+        
+            const x = room.geometry.origin.x * scale;
+            const y = room.geometry.origin.y * scale;
+            const w = room.geometry.width * scale;
+            const h = room.geometry.height * scale;
+        
+            const color = room.category === "common"
+                ? "#6fbf73"
+                : "#5fa4e8";
+        
+            roomsSvg += `
+                <rect
+                    x="${x}"
+                    y="${y}"
+                    width="${w}"
+                    height="${h}"
+                    fill="${color}"
+                    stroke="#333"
+                    stroke-width="0.5"
+                />
+            `;
+        });
+        
+        div.innerHTML = `
+        <div class="variant-rank">
+            #${index + 1}
+            ${index === 0 ? `<span class="best-star" title="Best performing layout">★</span>` : ``}
+        </div>
+        
+        <svg width="${thumbWidth}" height="${thumbHeight}">
+            ${roomsSvg}
+        </svg>
+        
+        <div class="variant-eff">
+            Eff ${(variant.efficiency * 100).toFixed(1)}%
+        </div>
+        `;
+
+        div.addEventListener("click", () => {
+
+            // remove highlight from all variants
+            document.querySelectorAll(".variant-thumb")
+                .forEach(el => el.classList.remove("selected"));
+        
+            // highlight this variant
+            div.classList.add("selected");
+        
+            renderLayout({
+                boundary: data.boundary,
+                rooms: variant.rooms
+            });
+        
+            renderMetrics({
+                boundary: data.boundary,
+                metrics: variant.metrics,
+                solver: {
+                    selected_profile: variant.profile,
+                    rotation: variant.rotation,
+                    sort_strategy: variant.sort_strategy,
+                    variants_tested: data.variants.length
+                }
+            });
+        
+        });
+
+        container.appendChild(div);
+
+    });
+
+}
+
 async function loadLayout() {
 
     let data;
@@ -225,8 +328,27 @@ async function loadLayout() {
 
     }
 
-    renderLayout(data);
-    renderMetrics(data);
+    renderVariants(data);
+
+    const variantsSorted = [...data.variants].sort((a,b)=>b.efficiency-a.efficiency);
+
+    const best = variantsSorted[0];
+
+    renderLayout({
+        boundary: data.boundary,
+        rooms: best.rooms
+    });
+
+    renderMetrics({
+        boundary: data.boundary,
+        metrics: best.metrics,
+        solver: {
+            selected_profile: best.profile,
+            rotation: best.rotation,
+            sort_strategy: best.sort_strategy,
+            variants_tested: data.variants.length
+        }
+    });
 
 }
 
