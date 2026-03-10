@@ -5,6 +5,7 @@
     <title>Floor Planner Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:,">
 </head>
 <body>
 
@@ -42,13 +43,17 @@
                 <button id="zoom-out" class="control-button">−</button>
                 <button id="recenter" class="control-button">⟲</button>
             </div>
-            <p class="canvas-note">Hover over a room to view its individual metrics.</p>
-            <svg id="floorplan"></svg>
+            <div id="canvas-container">
+                <svg id="floorplan"></svg>
+            </div>
         </div>
 
         <div class="variant-panel">
-            <h3>Layout Variants</h3>
-            <p class="variant-order">Sorted by packing efficiency (best → worst)</p>
+            <div class="variant-header">
+                <h3 class="variant-title">Layout Variants</h3>
+                <p class="variant-subtitle">Sorted by packing efficiency (best → worst)</p>
+                <button id="compare-toggle">Compare</button>
+            </div>
             <div id="variant-grid"></div>
         </div>
     

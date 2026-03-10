@@ -1,5 +1,6 @@
 const tooltip = document.getElementById("tooltip");
 const svgElement = document.getElementById("floorplan");
+const canvasPanel = document.querySelector(".canvas-panel");
 
 let viewScale = 1;
 let viewTranslateX = 0;
@@ -10,6 +11,8 @@ let panStartY = 0;
 let panOriginX = 0;
 let panOriginY = 0;
 let currentLayoutData = null;
+let compareMode = false;
+let compareSelection = [];
 
 function showTooltip(html, event) {
 
@@ -35,14 +38,16 @@ function hideTooltip() {
 
 function applyViewTransform() {
 
-    const group = document.getElementById("floorplan-group");
+    const groups = document.querySelectorAll("#floorplan-group");
 
-    if (group) {
+    groups.forEach(group => {
+
         group.setAttribute(
             "transform",
             `translate(${viewTranslateX}, ${viewTranslateY}) scale(${viewScale})`
         );
-    }
+    
+    });
 
 }
 
@@ -57,12 +62,22 @@ function resetView() {
 
 function zoomBy(factor, event) {
 
-    const rect = svgElement.getBoundingClientRect();
+    let cx, cy;
 
-    // If we have an event, zoom around the cursor position.
-    // Otherwise, zoom around the center of the SVG.
-    const cx = event ? event.clientX - rect.left : rect.width / 2;
-    const cy = event ? event.clientY - rect.top : rect.height / 2;
+    if (event && event.rect) {
+
+        cx = event.clientX;
+        cy = event.clientY;
+
+    } else {
+
+        const svg = document.querySelector("svg");
+        const rect = svg.getBoundingClientRect();
+
+        cx = rect.width / 2;
+        cy = rect.height / 2;
+
+    }
 
     const svgX = (cx - viewTranslateX) / viewScale;
     const svgY = (cy - viewTranslateY) / viewScale;
@@ -79,6 +94,8 @@ function zoomBy(factor, event) {
 
 function setupCanvasInteractions() {
 
+    const canvasPanel = document.querySelector(".canvas-panel");
+
     if (!svgElement) return;
 
     // Buttons
@@ -87,16 +104,30 @@ function setupCanvasInteractions() {
     document.getElementById("recenter").addEventListener("click", resetView);
 
     // Mouse wheel zoom
-    svgElement.addEventListener("wheel", (event) => {
+    document.querySelectorAll("svg").forEach(svg => {
 
-        event.preventDefault();
-        const factor = event.deltaY < 0 ? 1.1 : 1 / 1.1;
-        zoomBy(factor, event);
+        canvasPanel.addEventListener("wheel", (event) => {
 
-    }, { passive: false });
+            event.preventDefault();
+        
+            const svg = event.target.closest("svg");
+            if (!svg) return;
+        
+            const rect = svg.getBoundingClientRect();
+        
+            const cx = event.clientX - rect.left;
+            const cy = event.clientY - rect.top;
+        
+            const factor = event.deltaY < 0 ? 1.1 : 1 / 1.1;
+        
+            zoomBy(factor, { clientX: cx, clientY: cy, rect });
+        
+        }, { passive: false });
+    
+    });
 
     // Mouse drag pan
-    svgElement.addEventListener("mousedown", (event) => {
+    canvasPanel.addEventListener("mousedown", (event) => {
 
         if (event.button !== 0) return;
 
@@ -203,6 +234,21 @@ function setupLegendInteractions() {
 
 }
 
+document.getElementById("compare-toggle").addEventListener("click", () => {
+
+    compareMode = !compareMode;
+    compareSelection = [];
+
+    resetView();
+
+    // clear all variant highlights
+    document.querySelectorAll(".variant-thumb").forEach(v => {
+        v.classList.remove("selected");
+        v.classList.remove("compare-selected");
+    });
+
+});
+
 function renderVariants(data) {
 
     const container = document.getElementById("variant-grid");
@@ -222,7 +268,7 @@ function renderVariants(data) {
         div.classList.add("variant-thumb");
         
         if (index === 0) {
-            div.classList.add("selected");
+            div.classList.add("compare-selected");
         }
 
         const thumbWidth = 160;
@@ -275,28 +321,41 @@ function renderVariants(data) {
 
         div.addEventListener("click", () => {
 
-            // remove highlight from all variants
-            document.querySelectorAll(".variant-thumb")
-                .forEach(el => el.classList.remove("selected"));
+            if (!compareMode) {
         
-            // highlight this variant
-            div.classList.add("selected");
+                renderLayout({
+                    boundary: data.boundary,
+                    rooms: variant.rooms
+                });
         
-            renderLayout({
-                boundary: data.boundary,
-                rooms: variant.rooms
-            });
+                renderMetrics({
+                    boundary: data.boundary,
+                    metrics: variant.metrics,
+                    solver: {
+                        selected_profile: variant.profile,
+                        rotation: variant.rotation,
+                        sort_strategy: variant.sort_strategy,
+                        variants_tested: data.variants.length
+                    }
+                });
         
-            renderMetrics({
-                boundary: data.boundary,
-                metrics: variant.metrics,
-                solver: {
-                    selected_profile: variant.profile,
-                    rotation: variant.rotation,
-                    sort_strategy: variant.sort_strategy,
-                    variants_tested: data.variants.length
+            } else {
+        
+                if (compareSelection.length < 2) {
+        
+                    compareSelection.push(variant);
+        
+                    div.classList.add("selected");
+        
                 }
-            });
+        
+                if (compareSelection.length === 2) {
+        
+                    renderComparison(data.boundary, compareSelection);
+        
+                }
+        
+            }
         
         });
 
@@ -353,9 +412,10 @@ async function loadLayout() {
 
 }
 
-function renderLayout(data) {
+function renderLayout(data, svgOverride = null) {
     currentLayoutData = data;
-    const svg = document.getElementById("floorplan");
+    const svg = svgOverride || document.getElementById("floorplan");
+    if (!svg) return;
 
     // Clear previous render
     svg.innerHTML = "";
@@ -363,21 +423,21 @@ function renderLayout(data) {
     const boundaryWidth = data.boundary.width;
     const boundaryHeight = data.boundary.height;
 
-    const container = document.querySelector(".canvas-panel");
+    const rect = svg.getBoundingClientRect();
 
-    const svgWidth = container.clientWidth - 40;
-    const svgHeight = container.clientHeight - 40;
+    const svgWidth = rect.width;
+    const svgHeight = rect.height;
 
     svg.setAttribute("width", svgWidth);
     svg.setAttribute("height", svgHeight);
 
     // Auto-fit scale so layout fits inside canvas
 
-    const padding = 20;
+    const padding = 40;
 
-    const scaleX = (svgWidth - padding * 2) / boundaryWidth;
-    const scaleY = (svgHeight - padding * 2) / boundaryHeight;
-
+    const scaleX = (svgWidth - padding) / boundaryWidth;
+    const scaleY = (svgHeight - padding) / boundaryHeight;
+    
     const scale = Math.min(scaleX, scaleY);
 
     // Center layout
@@ -385,7 +445,7 @@ function renderLayout(data) {
     const offsetY = (svgHeight - boundaryHeight * scale) / 2;
 
     // Clear any existing group
-    const existingGroup = document.getElementById("floorplan-group");
+    const existingGroup = svg.querySelector("#floorplan-group");
     if (existingGroup) {
         svg.removeChild(existingGroup);
     }
@@ -476,10 +536,52 @@ function renderLayout(data) {
 
     svg.appendChild(group);
     applyViewTransform();
+    
+    }
+    
+    function renderComparison(boundary, variants) {
 
-}
+        resetView();
+    
+        const container = document.getElementById("canvas-container");
+    
+        container.innerHTML = "";
+    
+        variants.forEach((variant) => {
+    
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("compare-wrapper");
+            
+            const label = document.createElement("div");
+            label.classList.add("compare-label");
+            
+            label.innerText = `Variant #${variant.index}  •  ${(variant.efficiency * 100).toFixed(1)}% efficiency`;
+            
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.classList.add("compare-canvas");
+            
+            svg.style.width = "100%";
+            svg.style.height = "100%";
+            
+            wrapper.appendChild(label);
+            wrapper.appendChild(svg);
+            
+            container.appendChild(wrapper);
+    
+            requestAnimationFrame(() => {
 
-function renderMetrics(data) {
+                renderLayout({
+                    boundary: boundary,
+                    rooms: variant.rooms
+                }, svg);
+            
+            });
+    
+        });
+    
+    }
+    
+    function renderMetrics(data) {
 
     const metrics = data.metrics;
     const solver = data.solver;
