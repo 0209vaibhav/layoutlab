@@ -211,7 +211,7 @@ METRICS DASHBOARD
 
 .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
 }
 
@@ -248,7 +248,7 @@ METRICS DASHBOARD
 }
 
 .metric-card:first-child {
-    background: hsl(0, 0%, 87%);
+    background: hsla(0, 0%, 0%, 0.05);
 }
 
 #tooltip {
@@ -277,7 +277,6 @@ METRICS DASHBOARD
 /* ---------------------------
 VARIANT PANEL (RIGHT SIDE)
 --------------------------- */
-
 .variant-panel {
     width: 275px;
     flex-shrink: 0;
@@ -396,6 +395,11 @@ VARIANT PANEL (RIGHT SIDE)
     min-width: 0;
     min-height: 0;
     overflow: hidden;
+    border-right: 1px solid #ccc;
+}
+
+.compare-wrapper:last-child {
+    border-right: none;
 }
 
 #floorplan {
@@ -415,15 +419,25 @@ VARIANT PANEL (RIGHT SIDE)
 
 #metrics-container {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     border-top: 1px solid #ddd;
-    padding: 12px;
+    padding: 16px;
+    background: #fafafa;
+    align-items: stretch;
 }
 
 .metrics-card {
-    flex: 1;
+    flex: 1 1 50%;
     font-size: 12px;
     line-height: 1.5;
+    min-width: 0;
+    border-right: 1px solid #ddd;
+    padding-right: 16px;
+}
+
+.metrics-card:last-child {
+    border-right: none;
+    padding-right: 0px;
 }
 
 .metrics-card p {
