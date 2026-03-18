@@ -1,7 +1,7 @@
 {
     "boundary": {
-        "width": 25.0,
-        "height": 10.0,
+        "width": 10.0,
+        "height": 25.0,
         "area": 250.0
     },
     "variants": [

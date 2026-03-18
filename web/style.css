@@ -1,6 +1,6 @@
 html, body {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 body {
@@ -10,12 +10,20 @@ body {
     box-sizing: border-box;
 }
 
-/* Title */
-
-.title {
-    font-size: 32px;
-    margin-bottom: 20px;
+.panel-title {
+    font-size: 24px;
     font-weight: 600;
+    margin: 20px;
+    text-align: left;
+}
+
+.panel-subtitle {
+    font-size: 14px;
+    color: hsl(0, 0%, 50%);
+    margin-top: 2px;
+    font-weight: 100;
+    text-align: center;
+    font-style: italic;
 }
 
 /* Layout */
@@ -23,7 +31,8 @@ body {
 .dashboard {
     display: flex;
     gap: 30px;
-    height: calc(100vh - 120px); 
+    height: calc(100vh - 60px); 
+    margin-top: 30px;
 }
 
 /* Left Panel */
@@ -35,28 +44,25 @@ body {
     flex-direction: column;
     gap: 20px;
     overflow-y:visible;
+    border: 1px solid rgb(200, 200, 200);
 
 }
-
 
 /* RIGHT PANEL */
 
 .canvas-panel {
     flex: 1;
-    position: relative;
-    background: white;
-    border-radius: 0px;
+    position: relative;   /* 🔥 THIS FIXES IT */
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    height: 100%;
 
-    overflow:hidden;
+    align-items: stretch;
+    justify-content: flex-start;
 
-    background-color: #ffffff;
+    overflow: hidden;
     border: 1px solid rgb(200, 200, 200);
-
-    scroll-behavior: smooth;
 }
 
 .canvas-note {
@@ -81,10 +87,11 @@ body {
 }
 
 .control-button {
+    width: 30px;
+    height: 30px;
     border: 1px solid #ccc;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 4px;
-    padding: 4px 8px;
     font-size: 13px;
     cursor: pointer;
     line-height: 1;
@@ -92,11 +99,6 @@ body {
 
 .control-button:hover {
     background: #f3f3f3;
-}
-
-#floorplan {
-    background: white;
-    display: block;
 }
 
 /* Cards */
@@ -107,7 +109,6 @@ body {
     border-radius: 0px;
 
     background-color: #ffffff;
-    border: 1px solid rgb(200, 200, 200);
     padding: 20px;
 }
 
@@ -197,26 +198,57 @@ body {
     background: #5fa4e8;
 }
 
-/* Metrics */
+/* ---------------------------
+METRICS DASHBOARD
+--------------------------- */
 
-#metrics {
-    flex: 1;
+.metrics-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
 }
 
-
-#metrics::-webkit-scrollbar {
-    width: 6px;
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
 }
 
-#metrics::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 4px;
+.metric-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: left;
 }
 
-#metrics p {
-    margin-bottom: 0px;
-    margin-top: 6px;
-    font-size: 14px;
+.metric-label {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.metric-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+.metrics-meta {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #666;
+    display: flex;
+    gap: 12px;
+}
+
+.metric-card:hover {
+    border-color: #999;
+}
+
+.metric-card:first-child {
+    background: hsl(0, 0%, 87%);
 }
 
 #tooltip {
@@ -300,7 +332,6 @@ VARIANT PANEL (RIGHT SIDE)
     align-items: center;
 }
 
-
 .variant-thumb:hover {
     border: 2px solid rgba(0, 0, 0, 0.35);
 }
@@ -311,10 +342,6 @@ VARIANT PANEL (RIGHT SIDE)
 
 .variant-thumb.selected {
     border: 2px solid #000000;
-}
-
-.variant-panel {
-    max-height: calc(100vh - 120px);
 }
 
 .variant-rank {
@@ -347,14 +374,19 @@ VARIANT PANEL (RIGHT SIDE)
 }
 
 #canvas-container {
+    flex: 1;
     display: flex;
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
+    flex-direction: row;
+    min-height: 0;
+    position: relative;
 }
 
 .compare-canvas {
     flex: 1;
-    border: 1px solid #ccc;
+    width: 100%;
+    height:100%;
+    display: block;
 }
 
 .compare-wrapper {
@@ -362,19 +394,15 @@ VARIANT PANEL (RIGHT SIDE)
     display: flex;
     flex-direction: column;
     min-width: 0;
-    height: 100%;
+    min-height: 0;
+    overflow: hidden;
 }
 
-.compare-label {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 8px;
-    border-bottom: 1px solid #ccc;
-    background: #f8f8f8;
-}
-
-.compare-canvas,
 #floorplan {
+    display: block;
+}
+
+#canvas-container svg {
     width: 100%;
     height: 100%;
 }
@@ -383,6 +411,23 @@ VARIANT PANEL (RIGHT SIDE)
     border: 2px solid black;
 }
 
-#canvas-container svg {
-    pointer-events: all;
+
+
+#metrics-container {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid #ddd;
+    padding: 12px;
+}
+
+.metrics-card {
+    flex: 1;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.metrics-card p {
+    margin-bottom: 0px;
+    margin-top: 6px;
+    font-size: 14px;
 }

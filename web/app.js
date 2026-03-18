@@ -52,12 +52,13 @@ function applyViewTransform() {
 }
 
 function resetView() {
-
     viewScale = 1;
     viewTranslateX = 0;
     viewTranslateY = 0;
-    applyViewTransform();
 
+    if (!compareMode) {
+        applyViewTransform();
+    }
 }
 
 function zoomBy(factor, event) {
@@ -328,16 +329,18 @@ function renderVariants(data) {
                     rooms: variant.rooms
                 });
         
+                const metricsContainer = document.getElementById("metrics-container");
+                metricsContainer.innerHTML = "";
+                
                 renderMetrics({
                     boundary: data.boundary,
                     metrics: variant.metrics,
-                    solver: {
-                        selected_profile: variant.profile,
+                    solver: {                         selected_profile: variant.profile,
                         rotation: variant.rotation,
                         sort_strategy: variant.sort_strategy,
-                        variants_tested: data.variants.length
-                    }
-                });
+                        variants_tested: data.variants.length},
+                    variant_index: index + 1
+                }, metricsContainer);
         
             } else {
         
@@ -394,11 +397,14 @@ async function loadLayout() {
 
     const best = variantsSorted[0];
 
+    const metricsContainer = document.getElementById("metrics-container");
+    metricsContainer.innerHTML = "";
+    
     renderLayout({
         boundary: data.boundary,
         rooms: best.rooms
     });
-
+    
     renderMetrics({
         boundary: data.boundary,
         metrics: best.metrics,
@@ -407,53 +413,63 @@ async function loadLayout() {
             rotation: best.rotation,
             sort_strategy: best.sort_strategy,
             variants_tested: data.variants.length
-        }
-    });
+        },
+        variant_index: 1
+    }, metricsContainer);
 
 }
 
 function renderLayout(data, svgOverride = null) {
+
+    requestAnimationFrame(() => {
+
+        _renderLayout(data, svgOverride);
+
+    });
+}
+
+
+function _renderLayout(data, svgOverride = null) {
+
     currentLayoutData = data;
+
     const svg = svgOverride || document.getElementById("floorplan");
     if (!svg) return;
 
-    // Clear previous render
     svg.innerHTML = "";
 
     const boundaryWidth = data.boundary.width;
     const boundaryHeight = data.boundary.height;
 
-    const rect = svg.getBoundingClientRect();
+    const container = svg.parentElement;
 
-    const svgWidth = rect.width;
-    const svgHeight = rect.height;
+    const svgWidth = container.clientWidth;
+    const svgHeight = container.clientHeight;
 
+    // ✅ Apply size (JS controls, not CSS)
     svg.setAttribute("width", svgWidth);
     svg.setAttribute("height", svgHeight);
 
-    // Auto-fit scale so layout fits inside canvas
-
+    // 🔹 Auto-fit scale
     const padding = 40;
 
     const scaleX = (svgWidth - padding) / boundaryWidth;
     const scaleY = (svgHeight - padding) / boundaryHeight;
-    
+
     const scale = Math.min(scaleX, scaleY);
 
-    // Center layout
-    const offsetX = (svgWidth - boundaryWidth * scale) / 2;
-    const offsetY = (svgHeight - boundaryHeight * scale) / 2;
+    // 🔹 Center layout
+    const layoutWidth = boundaryWidth * scale;
+    const layoutHeight = boundaryHeight * scale;
 
-    // Clear any existing group
-    const existingGroup = svg.querySelector("#floorplan-group");
-    if (existingGroup) {
-        svg.removeChild(existingGroup);
-    }
+    const offsetX = (svgWidth - layoutWidth) * 0.5;
+    const offsetY = (svgHeight - layoutHeight) * 0.5;
 
+    // 🔹 Create group
     const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
     group.setAttribute("id", "floorplan-group");
-    
-    // Draw boundary
+
+    // 🔹 Boundary
     const boundaryRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
     boundaryRect.setAttribute("x", offsetX);
@@ -467,14 +483,13 @@ function renderLayout(data, svgOverride = null) {
 
     group.appendChild(boundaryRect);
 
-    // Draw rooms
+    // 🔹 Rooms
     data.rooms.forEach(room => {
 
         const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
         rect.setAttribute("x", offsetX + room.geometry.origin.x * scale);
         rect.setAttribute("y", offsetY + room.geometry.origin.y * scale);
-
         rect.setAttribute("width", room.geometry.width * scale);
         rect.setAttribute("height", room.geometry.height * scale);
 
@@ -487,27 +502,20 @@ function renderLayout(data, svgOverride = null) {
                 <strong>${room.name}</strong>
                 <hr>
                 Width: ${room.geometry.width.toFixed(2)} m<br>
-                Height: ${room.geometry.height.toFixed(2)} m
-<br><br>
+                Height: ${room.geometry.height.toFixed(2)} m<br><br>
                 Area: ${room.computed_area} m²<br>
                 Target area: ${room.target_area} m²<br>
                 Minimum area: ${room.minimum_area} m²<br>
-
             `, event);
-        
-        });
-        
-        rect.addEventListener("mousemove", moveTooltip);
-        
-        rect.addEventListener("mouseout", () => {
 
-            hideTooltip();
-        
         });
+
+        rect.addEventListener("mousemove", moveTooltip);
+        rect.addEventListener("mouseout", hideTooltip);
 
         group.appendChild(rect);
 
-        // Room label
+        // 🔹 Label
         const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
 
         label.setAttribute(
@@ -525,7 +533,6 @@ function renderLayout(data, svgOverride = null) {
         label.setAttribute("font-size", "11");
         label.setAttribute("font-weight", "500");
         label.setAttribute("fill", "#222");
-
         label.setAttribute("pointer-events", "none");
 
         label.textContent = room.name;
@@ -535,210 +542,147 @@ function renderLayout(data, svgOverride = null) {
     });
 
     svg.appendChild(group);
-    applyViewTransform();
-    
+
+    // 🔥 Apply zoom ONLY in single mode
+    if (!compareMode) {
+        applyViewTransform();
     }
+}
     
     function renderComparison(boundary, variants) {
 
         resetView();
     
-        const container = document.getElementById("canvas-container");
-    
+        const container = document.getElementById("canvas-container");    
         container.innerHTML = "";
+
+        const metricsContainer = document.getElementById("metrics-container");
+        metricsContainer.innerHTML = "";
     
-        variants.forEach((variant) => {
+        variants.forEach((variant, i) => {
+            variant.index = variant.index || (i + 1);
     
             const wrapper = document.createElement("div");
             wrapper.classList.add("compare-wrapper");
             
-            const label = document.createElement("div");
-            label.classList.add("compare-label");
-            
-            label.innerText = `Variant #${variant.index}  •  ${(variant.efficiency * 100).toFixed(1)}% efficiency`;
-            
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             svg.classList.add("compare-canvas");
             
-            svg.style.width = "100%";
-            svg.style.height = "100%";
             
-            wrapper.appendChild(label);
             wrapper.appendChild(svg);
-            
             container.appendChild(wrapper);
     
             requestAnimationFrame(() => {
 
+                // 🔥 HARD RESET TRANSFORM (CRITICAL)
+                viewScale = 1;
+                viewTranslateX = 0;
+                viewTranslateY = 0;
+            
                 renderLayout({
                     boundary: boundary,
                     rooms: variant.rooms
                 }, svg);
             
             });
+
+                renderMetrics({
+                    boundary: boundary,
+                    metrics: variant.metrics,
+                    solver: {
+                        selected_profile: variant.profile,
+                        rotation: variant.rotation,
+                        sort_strategy: variant.sort_strategy
+                    },
+                    variant_index: variant.index
+                }, metricsContainer);
+            
+            });
     
-        });
+        }
     
-    }
+    function renderMetrics(data, container) {
+
+        const metrics = data.metrics;
+        const solver = data.solver;
     
-    function renderMetrics(data) {
-
-    const metrics = data.metrics;
-    const solver = data.solver;
-    const boundary = data.boundary;
-
-    const container = document.getElementById("metrics");
-
-    container.innerHTML = `
-
-    <h3>Boundary</h3>
-        <hr>
+        const div = document.createElement("div");
+        div.classList.add("metrics-card");
     
-    <p>
-    <strong>Boundary Width</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Description</strong><br>
-        Width of the rectangular boundary drawn in Rhino.">ℹ
-        </span>
-        : ${data.boundary.width.toFixed(2)} m
-    </p>
+        div.innerHTML = `
 
-
-    <p>
-    <strong>Boundary Height</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Description</strong><br>
-        Height of the rectangular boundary drawn in Rhino.">ℹ
-        </span>
-    : ${data.boundary.height.toFixed(2)} m
-    </p>
-
-    <p>
-    <strong>Gross Floor Area</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Boundary width × Boundary height
-        ">
-        ℹ
-        </span>
-    : ${metrics.gross_floor_area.toFixed(2)} m²
-    </p>
+        <div class="metrics-title">
+            Variant #${data.variant_index || ""} 
+        </div>
     
-
-    <br>
-    <br>
+        <div class="metrics-grid">
     
-    <h3>Metrics</h3>
-    <hr>
-    <p>
-    <strong>Net Floor Area</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Sum of all room areas from generated geometry.
-        ">
-        ℹ
-        </span>
-    : ${metrics.net_floor_area.toFixed(2)} m²
-    </p>
+            <div class="metric-card">
+                <div class="metric-label">Efficiency</div>
+                <div class="metric-value">${(metrics.packing_efficiency * 100).toFixed(1)}%</div>
+            </div>
 
-    <p>
-    <strong>Common Area</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Sum of room areas where category = common.
-        ">
-        ℹ
-        </span>
-    : ${metrics.common_area.toFixed(2)} m²
-    </p>
+            <div class="metric-card">
+                <div class="metric-label">Width</div>
+                <div class="metric-value">${data.boundary.width.toFixed(1)} m</div>
+            </div>
     
-    <p>
-    <strong>Private Area</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Sum of room areas where category = private.
-        ">
-        ℹ
-        </span>
-    : ${metrics.private_area.toFixed(2)} m²
-    </p>
+            <div class="metric-card">
+                <div class="metric-label">Height</div>
+                <div class="metric-value">${data.boundary.height.toFixed(1)} m</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Gross Area</div>
+                <div class="metric-value">${metrics.gross_floor_area.toFixed(1)} m²</div>
+            </div>
     
-    <p>
-        <strong>Packing Efficiency</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Net Floor Area ÷ Gross Floor Area<br><br>
-        <strong>Description</strong><br>
-        Measures how efficiently the boundary space is used.
-        ">
-        ℹ
-        </span>
-        : ${(metrics.packing_efficiency * 100).toFixed(2)} %
-    </p>
+            <div class="metric-card">
+                <div class="metric-label">Net Area</div>
+                <div class="metric-value">${metrics.net_floor_area.toFixed(1)} m²</div>
+            </div>  
     
-    <p>
-    <strong>Common Ratio</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Common Area ÷ Net Floor Area
-        ">
-        ℹ
-        </span>
-    : ${(metrics.common_ratio * 100).toFixed(2)} %
-    </p>
+            <div class="metric-card">
+                <div class="metric-label">Private</div>
+                <div class="metric-value">${metrics.private_area.toFixed(1)} m²</div>
+            </div>
+    
+            <div class="metric-card">
+                <div class="metric-label">Common</div>
+                <div class="metric-value">${metrics.common_area.toFixed(1)} m²</div>
+            </div>
+    
+            <div class="metric-card">
+                <div class="metric-label">Private Ratio</div>
+                <div class="metric-value">${(metrics.private_ratio * 100).toFixed(1)}%</div>
+            </div>
+    
+            <div class="metric-card">
+                <div class="metric-label">Common Ratio</div>
+                <div class="metric-value">${(metrics.common_ratio * 100).toFixed(1)}%</div>
+            </div>
 
-    <p>
-    <strong>Private Ratio</strong>
-        <span class="info-icon"
-        data-tooltip="
-        <strong>Formula</strong><br>
-        Private Area ÷ Net Floor Area
-        ">
-        ℹ
-        </span>
-    : ${(metrics.private_ratio * 100).toFixed(2)} %
-    </p>
-       
+            <div class="metric-card">
+                <div class="metric-label">Profile</div>
+                <div class="metric-value">${solver.selected_profile}</div>
+            </div>
 
-    <br>
-    <br>
+            <div class="metric-card">
+                <div class="metric-label">Rotation</div>
+                <div class="metric-value">${solver.rotation}</div>
+            </div>
 
-    <h3>Solver Decision</h3>
-        <hr>
-    <p><strong>Program Profile:</strong> ${solver.selected_profile}</p>
-    <p><strong>Rotation Allowed:</strong> ${solver.rotation}</p>
-    <p><strong>Sort Strategy:</strong> ${solver.sort_strategy}</p>
-    <p><strong>Variants Evaluated:</strong> ${solver.variants_tested}</p>
+            <div class="metric-card">
+                <div class="metric-label">Sort</div>
+                <div class="metric-value">${solver.sort_strategy}</div>
+            </div>
+        
+        </div>
     
     `;
-
-    container.querySelectorAll(".info-icon").forEach(icon => {
-
-        icon.addEventListener("mouseover", (event) => {
-
-            showTooltip(icon.dataset.tooltip, event);
-
-        });
-
-        icon.addEventListener("mousemove", moveTooltip);
-
-        icon.addEventListener("mouseleave", () => {
-
-            hideTooltip();
-
-        });
-
-    });
-
-}
+    
+        container.appendChild(div);
+    }
 
 window.addEventListener("resize", () => {
 
