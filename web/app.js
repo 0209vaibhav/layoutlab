@@ -38,7 +38,7 @@ function hideTooltip() {
 
 function applyViewTransform() {
 
-    const groups = document.querySelectorAll("#floorplan-group");
+    const groups = document.querySelectorAll("g[id='floorplan-group']");
 
     groups.forEach(group => {
 
@@ -55,11 +55,8 @@ function resetView() {
     viewScale = 1;
     viewTranslateX = 0;
     viewTranslateY = 0;
-
-    if (!compareMode) {
-        applyViewTransform();
+    applyViewTransform();
     }
-}
 
 function zoomBy(factor, event) {
 
