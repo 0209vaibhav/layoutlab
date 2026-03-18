@@ -250,7 +250,6 @@ document.getElementById("compare-toggle").addEventListener("click", () => {
 function renderVariants(data) {
 
     const container = document.getElementById("variant-grid");
-
     if (!data.variants) return;
 
     const variants = [...data.variants];
@@ -261,6 +260,9 @@ function renderVariants(data) {
     container.innerHTML = "";
 
     variants.forEach((variant, index) => {
+
+        // ✅ store correct index
+        variant.originalIndex = index + 1;
 
         const div = document.createElement("div");
         div.classList.add("variant-thumb");
@@ -279,16 +281,15 @@ function renderVariants(data) {
         let roomsSvg = "";
         
         variant.rooms.forEach(room => {
-        
             const x = room.geometry.origin.x * scale;
             const y = room.geometry.origin.y * scale;
             const w = room.geometry.width * scale;
             const h = room.geometry.height * scale;
-        
+
             const color = room.category === "common"
                 ? "#6fbf73"
                 : "#5fa4e8";
-        
+
             roomsSvg += `
                 <rect
                     x="${x}"
@@ -304,7 +305,7 @@ function renderVariants(data) {
         
         div.innerHTML = `
         <div class="variant-rank">
-            #${index + 1}
+            #${variant.originalIndex}
             ${index === 0 ? `<span class="best-star" title="Best performing layout">★</span>` : ``}
         </div>
         
@@ -332,37 +333,30 @@ function renderVariants(data) {
                 renderMetrics({
                     boundary: data.boundary,
                     metrics: variant.metrics,
-                    solver: {                         selected_profile: variant.profile,
+                    solver: {
+                        selected_profile: variant.profile,
                         rotation: variant.rotation,
                         sort_strategy: variant.sort_strategy,
-                        variants_tested: data.variants.length},
-                    variant_index: index + 1
+                        variants_tested: data.variants.length
+                    },
+                    variant_index: variant.originalIndex   // ✅ FIXED
                 }, metricsContainer);
         
             } else {
         
                 if (compareSelection.length < 2) {
-        
                     compareSelection.push(variant);
-        
                     div.classList.add("selected");
-        
                 }
         
                 if (compareSelection.length === 2) {
-        
                     renderComparison(data.boundary, compareSelection);
-        
                 }
-        
             }
-        
         });
 
         container.appendChild(div);
-
     });
-
 }
 
 async function loadLayout() {
@@ -557,7 +551,7 @@ function _renderLayout(data, svgOverride = null) {
         metricsContainer.innerHTML = "";
     
         variants.forEach((variant, i) => {
-            variant.index = variant.index || (i + 1);
+            const variantIndex = variant.originalIndex;
     
             const wrapper = document.createElement("div");
             wrapper.classList.add("compare-wrapper");
@@ -591,7 +585,7 @@ function _renderLayout(data, svgOverride = null) {
                         rotation: variant.rotation,
                         sort_strategy: variant.sort_strategy
                     },
-                    variant_index: variant.index
+                    variant_index: variant.originalIndex
                 }, metricsContainer);
             
             });
