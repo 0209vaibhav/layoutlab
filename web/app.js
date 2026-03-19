@@ -322,6 +322,14 @@ function renderVariants(data) {
 
             if (!compareMode) {
         
+                // ✅ FIX: update UI selection
+                document.querySelectorAll(".variant-thumb").forEach(v => {
+                    v.classList.remove("selected");
+                    v.classList.remove("compare-selected");
+                });
+        
+                div.classList.add("compare-selected");
+        
                 renderLayout({
                     boundary: data.boundary,
                     rooms: variant.rooms
@@ -339,7 +347,7 @@ function renderVariants(data) {
                         sort_strategy: variant.sort_strategy,
                         variants_tested: data.variants.length
                     },
-                    variant_index: variant.originalIndex   // ✅ FIXED
+                    variant_index: variant.originalIndex
                 }, metricsContainer);
         
             } else {

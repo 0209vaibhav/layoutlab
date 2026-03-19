@@ -1,6 +1,6 @@
 html, body {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 body {
@@ -24,6 +24,28 @@ body {
     font-weight: 100;
     text-align: center;
     font-style: italic;
+}
+
+.Info-Text {
+    margin: 0 20px;
+    padding-bottom: 4px;
+    max-width: 235px;
+    color: #4a4a4a;
+    font-size: 12px;
+    line-height: 1.45;
+    text-align: justify;
+}
+
+.Info-Text h4 {
+    margin: 12px 0 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: 0.02em;
+}
+
+.Info-Text p {
+    margin: 0;
 }
 
 /* Layout */
@@ -331,16 +353,16 @@ VARIANT PANEL (RIGHT SIDE)
     align-items: center;
 }
 
+.variant-thumb.selected {
+    border: 2px solid hwb(0 0% 100%);
+}
+
 .variant-thumb:hover {
-    border: 2px solid rgba(0, 0, 0, 0.35);
+    border: 2px solid rgba(0, 0, 0, 0.35)
 }
 
 .variant-thumb svg {
     background: #fafafa;
-}
-
-.variant-thumb.selected {
-    border: 2px solid #000000;
 }
 
 .variant-rank {
@@ -445,3 +467,5 @@ VARIANT PANEL (RIGHT SIDE)
     margin-top: 6px;
     font-size: 14px;
 }
+
+
