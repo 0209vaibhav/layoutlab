@@ -44,10 +44,6 @@ body {
     letter-spacing: 0.02em;
 }
 
-.Info-Text p {
-    margin: 0;
-}
-
 /* Layout */
 
 .dashboard {
@@ -145,11 +141,11 @@ body {
 }
 
 .card h3 {
-    margin-top: 0px;
-    color: rgb(199, 199, 199);
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
+    margin: 12px 0 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: 0.02em;
 }
 
 /* Rooms */
@@ -225,10 +221,11 @@ METRICS DASHBOARD
 --------------------------- */
 
 .metrics-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
     color: #222;
+    letter-spacing: 0.02em;
 }
 
 .metrics-grid {
@@ -246,9 +243,12 @@ METRICS DASHBOARD
 }
 
 .metric-label {
-    font-size: 11px;
-    color: #777;
-    margin-bottom: 4px;
+    padding-bottom: 4px;
+    max-width: 235px;
+    color: #4a4a4a;
+    font-size: 12px;
+    line-height: 1.45;
+    text-align: justify;
 }
 
 .metric-value {
@@ -468,4 +468,56 @@ VARIANT PANEL (RIGHT SIDE)
     font-size: 14px;
 }
 
+/* ---------------------------
+TABS
+--------------------------- */
 
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin: 0 10px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 8px;
+    font-size: 12px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button:hover {
+    background: #f3f3f3;
+}
+
+.tab-button.active {
+    border-bottom: 2px solid black;
+    font-weight: 600;
+}
+
+/* ---------------------------
+TAB CONTENT
+--------------------------- */
+
+.tab-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* Placeholder content */
+
+.tab-placeholder {
+    padding: 20px;
+    font-size: 12px;
+    color: #777;
+}

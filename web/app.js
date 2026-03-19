@@ -683,6 +683,32 @@ function _renderLayout(data, svgOverride = null) {
         container.appendChild(div);
     }
 
+
+    function setupTabs() {
+
+        const buttons = document.querySelectorAll(".tab-button");
+        const panels = document.querySelectorAll(".tab-panel");
+    
+        buttons.forEach(button => {
+    
+            button.addEventListener("click", () => {
+    
+                const tab = button.dataset.tab;
+    
+                // reset
+                buttons.forEach(b => b.classList.remove("active"));
+                panels.forEach(p => p.classList.remove("active"));
+    
+                // activate
+                button.classList.add("active");
+                document.getElementById(tab).classList.add("active");
+    
+            });
+    
+        });
+    
+    }
+
 window.addEventListener("resize", () => {
 
     if (currentLayoutData) {
@@ -693,4 +719,5 @@ window.addEventListener("resize", () => {
 
 setupCanvasInteractions();
 setupLegendInteractions();
+setupTabs();
 loadLayout();
