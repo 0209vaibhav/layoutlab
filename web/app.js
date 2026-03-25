@@ -367,64 +367,50 @@ function renderVariants(data) {
     });
 }
 
-async function loadLayout() {
+function populateParameters(data) {
 
-    let data;
-
-    try {
-
-        const response = await fetch("../exports/layout.json");
-
-        if (!response.ok) {
-            throw new Error("Live layout not available");
-        }
-
-        data = await response.json();
-
-    } catch (error) {
-
-        console.log("Loading demo layout...");
-
-        const response = await fetch("demo_layout.json");
-        data = await response.json();
-
-    }
-
-    // If no variants, create single variant
-    if (!data.variants) {
-        data.variants = [{
-            rooms: data.rooms,
-            metrics: data.metrics,
-            profile: "generated",
-            rotation: false,
-            sort_strategy: "area_desc",
-            efficiency: data.metrics.packing_efficiency
-        }];
-    }
-
-    renderVariants(data);
+    document.getElementById("boundary-width").value = data.boundary.width;
+    document.getElementById("boundary-height").value = data.boundary.height;
 
     const best = data.variants[0];
 
-    const metricsContainer = document.getElementById("metrics-container");
-    metricsContainer.innerHTML = "";
+    const nameMap = {
+        living_room: "living",
+        kitchen: "kitchen",
+        bedroom_1: "bedroom1",
+        bedroom_2: "bedroom2",
+        bathroom_1: "bathroom1",
+        bathroom_2: "bathroom2",
+        circulation: "circulation"
+    };
 
-    renderLayout({
-        boundary: data.boundary,
-        rooms: best.rooms
+    best.rooms.forEach(room => {
+
+        const idBase = nameMap[room.name];
+
+        if (!idBase) return;
+
+        const target = document.getElementById(`${idBase}-target`);
+        const min = document.getElementById(`${idBase}-min`);
+
+        if (target) target.value = room.target_area;
+        if (min) min.value = room.minimum_area;
+
     });
 
-    renderMetrics({
-        boundary: data.boundary,
-        metrics: best.metrics,
-        solver: {
-            selected_profile: best.profile,
-            rotation: best.rotation,
-            sort_strategy: best.sort_strategy,
-            variants_tested: data.variants.length
+}
+
+async function loadLayout() {
+
+    const defaultParams = {
+        boundary: {
+            width: parseFloat(document.getElementById("boundary-width").value) || 15,
+            height: parseFloat(document.getElementById("boundary-height").value) || 10
         },
-        variant_index: 1
-    }, metricsContainer);
+        program: {}
+    };
+
+    await generateLayout(defaultParams);
 
 }
 
@@ -726,7 +712,7 @@ function setupParameterControls() {
         const params = {
 
             boundary: {
-                width: parseFloat(document.getElementById("boundary-width").value) || 25,
+                width: parseFloat(document.getElementById("boundary-width").value) || 15,
                 height: parseFloat(document.getElementById("boundary-height").value) || 10
             },
 
@@ -791,7 +777,8 @@ async function generateLayout(params) {
 
         const data = await response.json();
 
-        // Render variants
+        populateParameters(data);
+        
         renderVariants(data);
 
         // Get best variant

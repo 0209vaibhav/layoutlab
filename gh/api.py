@@ -13,6 +13,7 @@ from services.csv_loader import load_rooms_from_csv
 from services.packing_engine import pack_rooms
 from services.exporter import build_room_geometry
 
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -20,20 +21,36 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route("/generate-layout", methods=["POST"])
 def generate_layout_api():
 
-    params = request.json
+    params = request.json or {}
+
+    # ---------------------------
+    # Boundary (Safe Defaults)
+    # ---------------------------
+
+    boundary_params = params.get("boundary", {})
+
+    boundary_width = boundary_params.get("width", 25)
+    boundary_height = boundary_params.get("height", 10)
+
+    boundary = Boundary(boundary_width, boundary_height)
 
     csv_path = os.path.join(project_root, "data", "room_program.csv")
 
-    boundary = Boundary(
-        params["boundary"]["width"],
-        params["boundary"]["height"]
-    )
-
-    variants = []
+    # ---------------------------
+    # Variant Configurations
+    # ---------------------------
 
     profiles = ["compact", "balanced", "generous"]
     rotations = [False, True]
     sorts = ["area_desc", "area_asc"]
+
+    variants = []
+
+    program_data = params.get("program", {})
+
+    # ---------------------------
+    # Generate Variants
+    # ---------------------------
 
     for profile in profiles:
         for rotation in rotations:
@@ -41,16 +58,21 @@ def generate_layout_api():
 
                 rooms = load_rooms_from_csv(csv_path, profile=profile)
 
-                # Override user parameters
+                # Override user parameters safely
                 for room in rooms:
-                    if room.name in params["program"]:
-                        program = params["program"][room.name]
 
-                        if program["target"]:
-                            room.target_area = program["target"]
+                    if room.name in program_data:
 
-                        if program["min"]:
-                            room.min_area = program["min"]
+                        program = program_data[room.name]
+
+                        target = program.get("target")
+                        minimum = program.get("min")
+
+                        if target is not None:
+                            room.target_area = target
+
+                        if minimum is not None:
+                            room.min_area = minimum
 
                 config = {
                     "rotation": rotation,
@@ -60,6 +82,10 @@ def generate_layout_api():
                 packed = pack_rooms(boundary, rooms, config=config)
 
                 layout = Layout(boundary, packed)
+
+                # ---------------------------
+                # Build Room Data
+                # ---------------------------
 
                 rooms_data = []
 
@@ -73,6 +99,10 @@ def generate_layout_api():
                         "computed_area": room.area(),
                         "geometry": build_room_geometry(room)
                     })
+
+                # ---------------------------
+                # Variant Object
+                # ---------------------------
 
                 variant = {
                     "rooms": rooms_data,
@@ -93,8 +123,15 @@ def generate_layout_api():
 
                 variants.append(variant)
 
-    # Sort best → worst
+    # ---------------------------
+    # Sort Best Variant First
+    # ---------------------------
+
     variants.sort(key=lambda v: v["efficiency"], reverse=True)
+
+    # ---------------------------
+    # Final Output
+    # ---------------------------
 
     output = {
         "boundary": boundary.to_dict(),
