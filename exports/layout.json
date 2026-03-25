@@ -1,1570 +1,262 @@
 {
     "boundary": {
-        "width": 10.0,
-        "height": 25.0,
+        "width": 25.0,
+        "height": 10.0,
         "area": 250.0
     },
-    "variants": [
+    "rooms": [
         {
-            "index": 0,
-            "profile": "compact",
-            "rotation": false,
-            "sort_strategy": "area_desc",
-            "efficiency": 0.254,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 63.5,
-                "private_area": 29.5,
-                "common_area": 34.0,
-                "packing_efficiency": 0.254,
-                "private_ratio": 0.4645669291338583,
-                "common_ratio": 0.5354330708661418
-            },
-            "rooms": [
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 20.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 20.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 5.65685424949238,
-                        "height": 3.5355339059327378
-                    }
+            "name": "living_room",
+            "type": "living",
+            "category": "common",
+            "target_area": 25.0,
+            "minimum_area": 20.0,
+            "computed_area": 25.0,
+            "geometry": {
+                "origin": {
+                    "x": 0,
+                    "y": 0
                 },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 3.5355339059327378
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
+                "width": 6.324555320336759,
+                "height": 3.952847075210474,
+                "corners": [
+                    {
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "x": 6.324555320336759,
+                        "y": 0
+                    },
+                    {
+                        "x": 6.324555320336759,
+                        "y": 3.952847075210474
+                    },
+                    {
+                        "x": 0,
+                        "y": 3.952847075210474
                     }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 10.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 10.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 6.697811566101118
-                        },
-                        "width": 3.4641016151377544,
-                        "height": 2.886751345948129
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 9.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 9.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.4641016151377544,
-                            "y": 6.697811566101118
-                        },
-                        "width": 3.420526275297414,
-                        "height": 2.6311740579210876
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 5.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.794733192202055,
-                            "y": 3.5355339059327378
-                        },
-                        "width": 3.162277660168379,
-                        "height": 1.5811388300841898
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 5.65685424949238,
-                            "y": 0
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
-                    }
-                },
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.5,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.884627890435168,
-                            "y": 5.116672736016928
-                        },
-                        "width": 1.7748239349298849,
-                        "height": 1.9720265943665387
-                    }
-                }
-            ]
+                ]
+            }
         },
         {
-            "index": 1,
-            "profile": "compact",
-            "rotation": true,
-            "sort_strategy": "area_desc",
-            "efficiency": 0.254,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 63.5,
-                "private_area": 29.5,
-                "common_area": 34.0,
-                "packing_efficiency": 0.254,
-                "private_ratio": 0.4645669291338583,
-                "common_ratio": 0.5354330708661418
-            },
-            "rooms": [
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 20.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 20.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 5.65685424949238,
-                        "height": 3.5355339059327378
-                    }
+            "name": "bedroom_1",
+            "type": "bedroom",
+            "category": "private",
+            "target_area": 14.0,
+            "minimum_area": 12.0,
+            "computed_area": 14.0,
+            "geometry": {
+                "origin": {
+                    "x": 0,
+                    "y": 3.952847075210474
                 },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 5.65685424949238
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
+                "width": 4.098780306383839,
+                "height": 3.4156502553198664,
+                "corners": [
+                    {
+                        "x": 0,
+                        "y": 3.952847075210474
+                    },
+                    {
+                        "x": 4.098780306383839,
+                        "y": 3.952847075210474
+                    },
+                    {
+                        "x": 4.098780306383839,
+                        "y": 7.3684973305303405
+                    },
+                    {
+                        "x": 0,
+                        "y": 7.3684973305303405
                     }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 10.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 10.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.1622776601683795,
-                            "y": 5.65685424949238
-                        },
-                        "width": 3.4641016151377544,
-                        "height": 2.886751345948129
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 9.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 9.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.5355339059327378,
-                            "y": 0
-                        },
-                        "width": 3.420526275297414,
-                        "height": 2.6311740579210876
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 5.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.5355339059327378,
-                            "y": 3.420526275297414
-                        },
-                        "width": 3.162277660168379,
-                        "height": 1.5811388300841898
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.166707963853826,
-                            "y": 0
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
-                    }
-                },
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.5,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.049029006116509,
-                            "y": 5.001665105381604
-                        },
-                        "width": 1.7748239349298849,
-                        "height": 1.9720265943665387
-                    }
-                }
-            ]
+                ]
+            }
         },
         {
-            "index": 2,
-            "profile": "compact",
-            "rotation": false,
-            "sort_strategy": "area_asc",
-            "efficiency": 0.254,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 63.5,
-                "private_area": 29.5,
-                "common_area": 34.0,
-                "packing_efficiency": 0.254,
-                "private_ratio": 0.4645669291338583,
-                "common_ratio": 0.5354330708661418
-            },
-            "rooms": [
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.5,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.884627890435168,
-                            "y": 5.116672736016928
-                        },
-                        "width": 1.7748239349298849,
-                        "height": 1.9720265943665387
-                    }
+            "name": "kitchen",
+            "type": "kitchen",
+            "category": "common",
+            "target_area": 12.0,
+            "minimum_area": 9.0,
+            "computed_area": 12.0,
+            "geometry": {
+                "origin": {
+                    "x": 4.098780306383839,
+                    "y": 3.952847075210474
                 },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 5.65685424949238,
-                            "y": 0
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
+                "width": 3.9496835316263,
+                "height": 3.0382181012509997,
+                "corners": [
+                    {
+                        "x": 4.098780306383839,
+                        "y": 3.952847075210474
+                    },
+                    {
+                        "x": 8.04846383801014,
+                        "y": 3.952847075210474
+                    },
+                    {
+                        "x": 8.04846383801014,
+                        "y": 6.991065176461474
+                    },
+                    {
+                        "x": 4.098780306383839,
+                        "y": 6.991065176461474
                     }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 5.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.794733192202055,
-                            "y": 3.5355339059327378
-                        },
-                        "width": 3.162277660168379,
-                        "height": 1.5811388300841898
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 9.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 9.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.4641016151377544,
-                            "y": 6.697811566101118
-                        },
-                        "width": 3.420526275297414,
-                        "height": 2.6311740579210876
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 10.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 10.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 6.697811566101118
-                        },
-                        "width": 3.4641016151377544,
-                        "height": 2.886751345948129
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 3.5355339059327378
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
-                    }
-                },
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 20.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 20.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 5.65685424949238,
-                        "height": 3.5355339059327378
-                    }
-                }
-            ]
+                ]
+            }
         },
         {
-            "index": 3,
-            "profile": "compact",
-            "rotation": true,
-            "sort_strategy": "area_asc",
-            "efficiency": 0.254,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 63.5,
-                "private_area": 29.5,
-                "common_area": 34.0,
-                "packing_efficiency": 0.254,
-                "private_ratio": 0.4645669291338583,
-                "common_ratio": 0.5354330708661418
-            },
-            "rooms": [
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.5,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.049029006116509,
-                            "y": 5.001665105381604
-                        },
-                        "width": 1.7748239349298849,
-                        "height": 1.9720265943665387
-                    }
+            "name": "bedroom_2",
+            "type": "bedroom",
+            "category": "private",
+            "target_area": 12.0,
+            "minimum_area": 10.0,
+            "computed_area": 12.0,
+            "geometry": {
+                "origin": {
+                    "x": 6.324555320336759,
+                    "y": 0
                 },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.166707963853826,
-                            "y": 0
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
+                "width": 3.794733192202055,
+                "height": 3.1622776601683795,
+                "corners": [
+                    {
+                        "x": 6.324555320336759,
+                        "y": 0
+                    },
+                    {
+                        "x": 10.119288512538814,
+                        "y": 0
+                    },
+                    {
+                        "x": 10.119288512538814,
+                        "y": 3.1622776601683795
+                    },
+                    {
+                        "x": 6.324555320336759,
+                        "y": 3.1622776601683795
                     }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 5.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.5355339059327378,
-                            "y": 3.420526275297414
-                        },
-                        "width": 3.162277660168379,
-                        "height": 1.5811388300841898
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 9.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 9.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.5355339059327378,
-                            "y": 0
-                        },
-                        "width": 3.420526275297414,
-                        "height": 2.6311740579210876
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 10.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 10.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.1622776601683795,
-                            "y": 5.65685424949238
-                        },
-                        "width": 3.4641016151377544,
-                        "height": 2.886751345948129
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 5.65685424949238
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
-                    }
-                },
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 20.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 20.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 5.65685424949238,
-                        "height": 3.5355339059327378
-                    }
-                }
-            ]
+                ]
+            }
         },
         {
-            "index": 4,
-            "profile": "balanced",
-            "rotation": false,
-            "sort_strategy": "area_desc",
-            "efficiency": 0.287,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 71.75,
-                "private_area": 32.25,
-                "common_area": 39.5,
-                "packing_efficiency": 0.287,
-                "private_ratio": 0.44947735191637633,
-                "common_ratio": 0.5505226480836237
-            },
-            "rooms": [
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 22.5,
-                    "minimum_area": 20.0,
-                    "computed_area": 22.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.0,
-                        "height": 3.75
-                    }
+            "name": "circulation",
+            "type": "circulation",
+            "category": "common",
+            "target_area": 8.0,
+            "minimum_area": 5.0,
+            "computed_area": 8.0,
+            "geometry": {
+                "origin": {
+                    "x": 0,
+                    "y": 7.3684973305303405
                 },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 13.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 13.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 3.75
-                        },
-                        "width": 3.9496835316262997,
-                        "height": 3.2914029430219167
+                "width": 4.0,
+                "height": 2.0,
+                "corners": [
+                    {
+                        "x": 0,
+                        "y": 7.3684973305303405
+                    },
+                    {
+                        "x": 4.0,
+                        "y": 7.3684973305303405
+                    },
+                    {
+                        "x": 4.0,
+                        "y": 9.36849733053034
+                    },
+                    {
+                        "x": 0,
+                        "y": 9.36849733053034
                     }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 11.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 11.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.9496835316262997,
-                            "y": 3.75
-                        },
-                        "width": 3.63318042491699,
-                        "height": 3.0276503540974917
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 10.5,
-                    "minimum_area": 9.0,
-                    "computed_area": 10.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 7.041402943021916
-                        },
-                        "width": 3.6945906403822333,
-                        "height": 2.8419928002940256
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 6.5,
-                    "minimum_area": 5.0,
-                    "computed_area": 6.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.6945906403822333,
-                            "y": 7.041402943021916
-                        },
-                        "width": 3.6055512754639896,
-                        "height": 1.8027756377319946
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.5,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 7.300141915846223,
-                            "y": 6.777650354097492
-                        },
-                        "width": 2.0124611797498106,
-                        "height": 2.23606797749979
-                    }
-                },
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.75,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.75,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.0,
-                            "y": 0
-                        },
-                        "width": 1.8371173070873834,
-                        "height": 2.041241452319315
-                    }
-                }
-            ]
+                ]
+            }
         },
         {
-            "index": 5,
-            "profile": "balanced",
-            "rotation": true,
-            "sort_strategy": "area_desc",
-            "efficiency": 0.287,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 71.75,
-                "private_area": 32.25,
-                "common_area": 39.5,
-                "packing_efficiency": 0.287,
-                "private_ratio": 0.44947735191637633,
-                "common_ratio": 0.5505226480836237
-            },
-            "rooms": [
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 22.5,
-                    "minimum_area": 20.0,
-                    "computed_area": 22.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.0,
-                        "height": 3.75
-                    }
+            "name": "bathroom_1",
+            "type": "bathroom",
+            "category": "private",
+            "target_area": 5.0,
+            "minimum_area": 4.0,
+            "computed_area": 5.0,
+            "geometry": {
+                "origin": {
+                    "x": 4.0,
+                    "y": 7.3684973305303405
                 },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 13.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 13.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 6.0
-                        },
-                        "width": 3.9496835316262997,
-                        "height": 3.2914029430219167
+                "width": 2.1213203435596424,
+                "height": 2.3570226039551585,
+                "corners": [
+                    {
+                        "x": 4.0,
+                        "y": 7.3684973305303405
+                    },
+                    {
+                        "x": 6.121320343559642,
+                        "y": 7.3684973305303405
+                    },
+                    {
+                        "x": 6.121320343559642,
+                        "y": 9.725519934485499
+                    },
+                    {
+                        "x": 4.0,
+                        "y": 9.725519934485499
                     }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 11.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 11.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.2914029430219167,
-                            "y": 6.0
-                        },
-                        "width": 3.63318042491699,
-                        "height": 3.0276503540974917
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 10.5,
-                    "minimum_area": 9.0,
-                    "computed_area": 10.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.75,
-                            "y": 0
-                        },
-                        "width": 3.6945906403822333,
-                        "height": 2.8419928002940256
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 6.5,
-                    "minimum_area": 5.0,
-                    "computed_area": 6.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.75,
-                            "y": 3.6945906403822333
-                        },
-                        "width": 3.6055512754639896,
-                        "height": 1.8027756377319946
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.5,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.591992800294026,
-                            "y": 0
-                        },
-                        "width": 2.0124611797498106,
-                        "height": 2.23606797749979
-                    }
-                },
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.75,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.75,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.319053297119408,
-                            "y": 5.497366278114228
-                        },
-                        "width": 1.8371173070873834,
-                        "height": 2.041241452319315
-                    }
-                }
-            ]
+                ]
+            }
         },
         {
-            "index": 6,
-            "profile": "balanced",
-            "rotation": false,
-            "sort_strategy": "area_asc",
-            "efficiency": 0.287,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 71.75,
-                "private_area": 32.25,
-                "common_area": 39.5,
-                "packing_efficiency": 0.287,
-                "private_ratio": 0.44947735191637633,
-                "common_ratio": 0.5505226480836237
-            },
-            "rooms": [
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.75,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.75,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.0,
-                            "y": 0
-                        },
-                        "width": 1.8371173070873834,
-                        "height": 2.041241452319315
-                    }
+            "name": "bathroom_2",
+            "type": "bathroom",
+            "category": "private",
+            "target_area": 4.0,
+            "minimum_area": 3.5,
+            "computed_area": 4.0,
+            "geometry": {
+                "origin": {
+                    "x": 6.121320343559642,
+                    "y": 6.991065176461474
                 },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.5,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 7.300141915846223,
-                            "y": 6.777650354097492
-                        },
-                        "width": 2.0124611797498106,
-                        "height": 2.23606797749979
+                "width": 1.8973665961010275,
+                "height": 2.1081851067789197,
+                "corners": [
+                    {
+                        "x": 6.121320343559642,
+                        "y": 6.991065176461474
+                    },
+                    {
+                        "x": 8.01868693966067,
+                        "y": 6.991065176461474
+                    },
+                    {
+                        "x": 8.01868693966067,
+                        "y": 9.099250283240394
+                    },
+                    {
+                        "x": 6.121320343559642,
+                        "y": 9.099250283240394
                     }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 6.5,
-                    "minimum_area": 5.0,
-                    "computed_area": 6.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.6945906403822333,
-                            "y": 7.041402943021916
-                        },
-                        "width": 3.6055512754639896,
-                        "height": 1.8027756377319946
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 10.5,
-                    "minimum_area": 9.0,
-                    "computed_area": 10.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 7.041402943021916
-                        },
-                        "width": 3.6945906403822333,
-                        "height": 2.8419928002940256
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 11.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 11.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.9496835316262997,
-                            "y": 3.75
-                        },
-                        "width": 3.63318042491699,
-                        "height": 3.0276503540974917
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 13.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 13.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 3.75
-                        },
-                        "width": 3.9496835316262997,
-                        "height": 3.2914029430219167
-                    }
-                },
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 22.5,
-                    "minimum_area": 20.0,
-                    "computed_area": 22.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.0,
-                        "height": 3.75
-                    }
-                }
-            ]
-        },
-        {
-            "index": 7,
-            "profile": "balanced",
-            "rotation": true,
-            "sort_strategy": "area_asc",
-            "efficiency": 0.287,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 71.75,
-                "private_area": 32.25,
-                "common_area": 39.5,
-                "packing_efficiency": 0.287,
-                "private_ratio": 0.44947735191637633,
-                "common_ratio": 0.5505226480836237
-            },
-            "rooms": [
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 3.75,
-                    "minimum_area": 3.5,
-                    "computed_area": 3.75,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.319053297119408,
-                            "y": 5.497366278114228
-                        },
-                        "width": 1.8371173070873834,
-                        "height": 2.041241452319315
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.5,
-                    "minimum_area": 4.0,
-                    "computed_area": 4.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.591992800294026,
-                            "y": 0
-                        },
-                        "width": 2.0124611797498106,
-                        "height": 2.23606797749979
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 6.5,
-                    "minimum_area": 5.0,
-                    "computed_area": 6.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.75,
-                            "y": 3.6945906403822333
-                        },
-                        "width": 3.6055512754639896,
-                        "height": 1.8027756377319946
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 10.5,
-                    "minimum_area": 9.0,
-                    "computed_area": 10.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.75,
-                            "y": 0
-                        },
-                        "width": 3.6945906403822333,
-                        "height": 2.8419928002940256
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 11.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 11.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.2914029430219167,
-                            "y": 6.0
-                        },
-                        "width": 3.63318042491699,
-                        "height": 3.0276503540974917
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 13.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 13.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 6.0
-                        },
-                        "width": 3.9496835316262997,
-                        "height": 3.2914029430219167
-                    }
-                },
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 22.5,
-                    "minimum_area": 20.0,
-                    "computed_area": 22.5,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.0,
-                        "height": 3.75
-                    }
-                }
-            ]
-        },
-        {
-            "index": 8,
-            "profile": "generous",
-            "rotation": false,
-            "sort_strategy": "area_desc",
-            "efficiency": 0.32,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 80.0,
-                "private_area": 35.0,
-                "common_area": 45.0,
-                "packing_efficiency": 0.32,
-                "private_ratio": 0.4375,
-                "common_ratio": 0.5625
-            },
-            "rooms": [
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 25.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 25.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.324555320336759,
-                        "height": 3.952847075210474
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 14.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 14.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 3.952847075210474
-                        },
-                        "width": 4.098780306383839,
-                        "height": 3.4156502553198664
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 12.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.098780306383839,
-                            "y": 3.952847075210474
-                        },
-                        "width": 3.9496835316263,
-                        "height": 3.0382181012509997
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.324555320336759,
-                            "y": 0
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 8.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 8.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 7.3684973305303405
-                        },
-                        "width": 4.0,
-                        "height": 2.0
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 5.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.0,
-                            "y": 7.3684973305303405
-                        },
-                        "width": 2.1213203435596424,
-                        "height": 2.3570226039551585
-                    }
-                },
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 3.5,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.121320343559642,
-                            "y": 6.991065176461474
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
-                    }
-                }
-            ]
-        },
-        {
-            "index": 9,
-            "profile": "generous",
-            "rotation": true,
-            "sort_strategy": "area_desc",
-            "efficiency": 0.32,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 80.0,
-                "private_area": 35.0,
-                "common_area": 45.0,
-                "packing_efficiency": 0.32,
-                "private_ratio": 0.4375,
-                "common_ratio": 0.5625
-            },
-            "rooms": [
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 25.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 25.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.324555320336759,
-                        "height": 3.952847075210474
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 14.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 14.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 6.324555320336759
-                        },
-                        "width": 4.098780306383839,
-                        "height": 3.4156502553198664
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 12.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.952847075210474,
-                            "y": 0
-                        },
-                        "width": 3.9496835316263,
-                        "height": 3.0382181012509997
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.098780306383839,
-                            "y": 3.9496835316263
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 8.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 8.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.098780306383839,
-                            "y": 7.744416723828355
-                        },
-                        "width": 4.0,
-                        "height": 2.0
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 5.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.991065176461474,
-                            "y": 0
-                        },
-                        "width": 2.1213203435596424,
-                        "height": 2.3570226039551585
-                    }
-                },
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 3.5,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 7.261057966552219,
-                            "y": 2.3570226039551585
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
-                    }
-                }
-            ]
-        },
-        {
-            "index": 10,
-            "profile": "generous",
-            "rotation": false,
-            "sort_strategy": "area_asc",
-            "efficiency": 0.32,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 80.0,
-                "private_area": 35.0,
-                "common_area": 45.0,
-                "packing_efficiency": 0.32,
-                "private_ratio": 0.4375,
-                "common_ratio": 0.5625
-            },
-            "rooms": [
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 3.5,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.121320343559642,
-                            "y": 6.991065176461474
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 5.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.0,
-                            "y": 7.3684973305303405
-                        },
-                        "width": 2.1213203435596424,
-                        "height": 2.3570226039551585
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 8.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 8.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 7.3684973305303405
-                        },
-                        "width": 4.0,
-                        "height": 2.0
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 12.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.098780306383839,
-                            "y": 3.952847075210474
-                        },
-                        "width": 3.9496835316263,
-                        "height": 3.0382181012509997
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.324555320336759,
-                            "y": 0
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 14.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 14.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 3.952847075210474
-                        },
-                        "width": 4.098780306383839,
-                        "height": 3.4156502553198664
-                    }
-                },
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 25.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 25.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.324555320336759,
-                        "height": 3.952847075210474
-                    }
-                }
-            ]
-        },
-        {
-            "index": 11,
-            "profile": "generous",
-            "rotation": true,
-            "sort_strategy": "area_asc",
-            "efficiency": 0.32,
-            "metrics": {
-                "gross_floor_area": 250.0,
-                "net_floor_area": 80.0,
-                "private_area": 35.0,
-                "common_area": 45.0,
-                "packing_efficiency": 0.32,
-                "private_ratio": 0.4375,
-                "common_ratio": 0.5625
-            },
-            "rooms": [
-                {
-                    "name": "bathroom_2",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 4.0,
-                    "minimum_area": 3.5,
-                    "computed_area": 4.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 7.261057966552219,
-                            "y": 2.3570226039551585
-                        },
-                        "width": 1.8973665961010275,
-                        "height": 2.1081851067789197
-                    }
-                },
-                {
-                    "name": "bathroom_1",
-                    "type": "bathroom",
-                    "category": "private",
-                    "target_area": 5.0,
-                    "minimum_area": 4.0,
-                    "computed_area": 5.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 6.991065176461474,
-                            "y": 0
-                        },
-                        "width": 2.1213203435596424,
-                        "height": 2.3570226039551585
-                    }
-                },
-                {
-                    "name": "circulation",
-                    "type": "circulation",
-                    "category": "common",
-                    "target_area": 8.0,
-                    "minimum_area": 5.0,
-                    "computed_area": 8.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.098780306383839,
-                            "y": 7.744416723828355
-                        },
-                        "width": 4.0,
-                        "height": 2.0
-                    }
-                },
-                {
-                    "name": "kitchen",
-                    "type": "kitchen",
-                    "category": "common",
-                    "target_area": 12.0,
-                    "minimum_area": 9.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 3.952847075210474,
-                            "y": 0
-                        },
-                        "width": 3.9496835316263,
-                        "height": 3.0382181012509997
-                    }
-                },
-                {
-                    "name": "bedroom_2",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 12.0,
-                    "minimum_area": 10.0,
-                    "computed_area": 12.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 4.098780306383839,
-                            "y": 3.9496835316263
-                        },
-                        "width": 3.794733192202055,
-                        "height": 3.1622776601683795
-                    }
-                },
-                {
-                    "name": "bedroom_1",
-                    "type": "bedroom",
-                    "category": "private",
-                    "target_area": 14.0,
-                    "minimum_area": 12.0,
-                    "computed_area": 14.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 6.324555320336759
-                        },
-                        "width": 4.098780306383839,
-                        "height": 3.4156502553198664
-                    }
-                },
-                {
-                    "name": "living_room",
-                    "type": "living",
-                    "category": "common",
-                    "target_area": 25.0,
-                    "minimum_area": 20.0,
-                    "computed_area": 25.0,
-                    "geometry": {
-                        "origin": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "width": 6.324555320336759,
-                        "height": 3.952847075210474
-                    }
-                }
-            ]
+                ]
+            }
         }
     ],
-    "selected_variant": 8
+    "metrics": {
+        "gross_floor_area": 250.0,
+        "net_floor_area": 80.0,
+        "private_area": 35.0,
+        "common_area": 45.0,
+        "packing_efficiency": 0.32,
+        "private_ratio": 0.4375,
+        "common_ratio": 0.5625
+    },
+    "solver": {
+        "selected_profile": "unknown",
+        "rotation": false,
+        "sort_strategy": "unknown",
+        "variants_tested": 1
+    }
 }

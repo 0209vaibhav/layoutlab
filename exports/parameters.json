@@ -1,0 +1,36 @@
+{
+    "boundary": {
+        "width": 25,
+        "height": 10
+    },
+    "program": {
+        "living_room": {
+            "target": null,
+            "min": null
+        },
+        "kitchen": {
+            "target": null,
+            "min": null
+        },
+        "bedroom_1": {
+            "target": null,
+            "min": null
+        },
+        "bedroom_2": {
+            "target": null,
+            "min": null
+        },
+        "bathroom_1": {
+            "target": null,
+            "min": null
+        },
+        "bathroom_2": {
+            "target": null,
+            "min": null
+        },
+        "circulation": {
+            "target": null,
+            "min": null
+        }
+    }
+}

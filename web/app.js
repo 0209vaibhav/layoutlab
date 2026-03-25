@@ -56,7 +56,7 @@ function resetView() {
     viewTranslateX = 0;
     viewTranslateY = 0;
     applyViewTransform();
-    }
+}
 
 function zoomBy(factor, event) {
 
@@ -390,20 +390,30 @@ async function loadLayout() {
 
     }
 
+    // If no variants, create single variant
+    if (!data.variants) {
+        data.variants = [{
+            rooms: data.rooms,
+            metrics: data.metrics,
+            profile: "generated",
+            rotation: false,
+            sort_strategy: "area_desc",
+            efficiency: data.metrics.packing_efficiency
+        }];
+    }
+
     renderVariants(data);
 
-    const variantsSorted = [...data.variants].sort((a,b)=>b.efficiency-a.efficiency);
-
-    const best = variantsSorted[0];
+    const best = data.variants[0];
 
     const metricsContainer = document.getElementById("metrics-container");
     metricsContainer.innerHTML = "";
-    
+
     renderLayout({
         boundary: data.boundary,
         rooms: best.rooms
     });
-    
+
     renderMetrics({
         boundary: data.boundary,
         metrics: best.metrics,
@@ -426,7 +436,6 @@ function renderLayout(data, svgOverride = null) {
 
     });
 }
-
 
 function _renderLayout(data, svgOverride = null) {
 
@@ -548,219 +557,281 @@ function _renderLayout(data, svgOverride = null) {
     }
 }
     
-    function renderComparison(boundary, variants) {
+function renderComparison(boundary, variants) {
 
-        resetView();
+    resetView();
+
+    const container = document.getElementById("canvas-container");    
+    container.innerHTML = "";
+
+    const metricsContainer = document.getElementById("metrics-container");
+    metricsContainer.innerHTML = "";
+
+    variants.forEach((variant, i) => {
+        const variantIndex = variant.originalIndex;
+
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("compare-wrapper");
+        
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.classList.add("compare-canvas");
+        
+        
+        wrapper.appendChild(svg);
+        container.appendChild(wrapper);
+
+        requestAnimationFrame(() => {
+
+            // 🔥 HARD RESET TRANSFORM (CRITICAL)
+            viewScale = 1;
+            viewTranslateX = 0;
+            viewTranslateY = 0;
+        
+            renderLayout({
+                boundary: boundary,
+                rooms: variant.rooms
+            }, svg);
+        
+        });
+
+            renderMetrics({
+                boundary: boundary,
+                metrics: variant.metrics,
+                solver: {
+                    selected_profile: variant.profile,
+                    rotation: variant.rotation,
+                    sort_strategy: variant.sort_strategy
+                },
+                variant_index: variant.originalIndex
+            }, metricsContainer);
+        
+        });
+
+}
+
+function renderMetrics(data, container) {
+
+    const metrics = data.metrics;
+    const solver = data.solver;
+
+    const div = document.createElement("div");
+    div.classList.add("metrics-card");
+
+    div.innerHTML = `
+
+    <div class="metrics-title">
+        Variant #${data.variant_index || ""} 
+    </div>
+
+    <div class="metrics-grid">
+
+        <div class="metric-card">
+            <div class="metric-label">Efficiency</div>
+            <div class="metric-value">${(metrics.packing_efficiency * 100).toFixed(1)}%</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Width</div>
+            <div class="metric-value">${data.boundary.width.toFixed(1)} m</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Height</div>
+            <div class="metric-value">${data.boundary.height.toFixed(1)} m</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Gross Area</div>
+            <div class="metric-value">${metrics.gross_floor_area.toFixed(1)} m²</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Net Area</div>
+            <div class="metric-value">${metrics.net_floor_area.toFixed(1)} m²</div>
+        </div>  
+
+        <div class="metric-card">
+            <div class="metric-label">Private</div>
+            <div class="metric-value">${metrics.private_area.toFixed(1)} m²</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Common</div>
+            <div class="metric-value">${metrics.common_area.toFixed(1)} m²</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Private Ratio</div>
+            <div class="metric-value">${(metrics.private_ratio * 100).toFixed(1)}%</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Common Ratio</div>
+            <div class="metric-value">${(metrics.common_ratio * 100).toFixed(1)}%</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Profile</div>
+            <div class="metric-value">${solver.selected_profile}</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Rotation</div>
+            <div class="metric-value">${solver.rotation}</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Sort</div>
+            <div class="metric-value">${solver.sort_strategy}</div>
+        </div>
     
-        const container = document.getElementById("canvas-container");    
-        container.innerHTML = "";
+    </div>
+
+`;
+
+    container.appendChild(div);
+}
+
+function setupTabs() {
+
+    const buttons = document.querySelectorAll(".tab-button");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    buttons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const tab = button.dataset.tab;
+
+            // reset
+            buttons.forEach(b => b.classList.remove("active"));
+            panels.forEach(p => p.classList.remove("active"));
+
+            // activate
+            button.classList.add("active");
+            document.getElementById(tab).classList.add("active");
+
+        });
+
+    });
+
+}
+
+function setupParameterControls() {
+
+    const button = document.getElementById("generate-layout");
+
+    button.addEventListener("click", async () => {
+
+        const params = {
+
+            boundary: {
+                width: parseFloat(document.getElementById("boundary-width").value) || 25,
+                height: parseFloat(document.getElementById("boundary-height").value) || 10
+            },
+
+            program: {
+                living_room: {
+                    target: parseFloat(document.getElementById("living-target").value),
+                    min: parseFloat(document.getElementById("living-min").value)
+                },
+
+                kitchen: {
+                    target: parseFloat(document.getElementById("kitchen-target").value),
+                    min: parseFloat(document.getElementById("kitchen-min").value)
+                },
+
+                bedroom_1: {
+                    target: parseFloat(document.getElementById("bedroom1-target").value),
+                    min: parseFloat(document.getElementById("bedroom1-min").value)
+                },
+
+                bedroom_2: {
+                    target: parseFloat(document.getElementById("bedroom2-target").value),
+                    min: parseFloat(document.getElementById("bedroom2-min").value)
+                },
+
+                bathroom_1: {
+                    target: parseFloat(document.getElementById("bathroom1-target").value),
+                    min: parseFloat(document.getElementById("bathroom1-min").value)
+                },
+
+                bathroom_2: {
+                    target: parseFloat(document.getElementById("bathroom2-target").value),
+                    min: parseFloat(document.getElementById("bathroom2-min").value)
+                },
+
+                circulation: {
+                    target: parseFloat(document.getElementById("circulation-target").value),
+                    min: parseFloat(document.getElementById("circulation-min").value)
+                }
+            }
+
+        };
+
+        console.log("Generating Layout:", params);
+
+        await generateLayout(params);
+
+    });
+
+}
+
+async function generateLayout(params) {
+
+    try {
+
+        const response = await fetch("http://localhost:8000/generate-layout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+        });
+
+        const data = await response.json();
+
+        // Wrap single layout into variants
+        const wrapped = {
+            boundary: data.boundary,
+            variants: [{
+                rooms: data.rooms,
+                metrics: data.metrics,
+                efficiency: data.metrics.packing_efficiency,
+                profile: "custom",
+                rotation: false,
+                sort_strategy: "custom"
+            }]
+        };
+
+        renderVariants(wrapped);
+
+        renderLayout({
+            boundary: wrapped.boundary,
+            rooms: wrapped.variants[0].rooms
+        });
 
         const metricsContainer = document.getElementById("metrics-container");
         metricsContainer.innerHTML = "";
-    
-        variants.forEach((variant, i) => {
-            const variantIndex = variant.originalIndex;
-    
-            const wrapper = document.createElement("div");
-            wrapper.classList.add("compare-wrapper");
-            
-            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            svg.classList.add("compare-canvas");
-            
-            
-            wrapper.appendChild(svg);
-            container.appendChild(wrapper);
-    
-            requestAnimationFrame(() => {
 
-                // 🔥 HARD RESET TRANSFORM (CRITICAL)
-                viewScale = 1;
-                viewTranslateX = 0;
-                viewTranslateY = 0;
-            
-                renderLayout({
-                    boundary: boundary,
-                    rooms: variant.rooms
-                }, svg);
-            
-            });
+        renderMetrics({
+            boundary: wrapped.boundary,
+            metrics: wrapped.variants[0].metrics,
+            solver: {
+                selected_profile: "custom",
+                rotation: false,
+                sort_strategy: "custom"
+            },
+            variant_index: 1
+        }, metricsContainer);
 
-                renderMetrics({
-                    boundary: boundary,
-                    metrics: variant.metrics,
-                    solver: {
-                        selected_profile: variant.profile,
-                        rotation: variant.rotation,
-                        sort_strategy: variant.sort_strategy
-                    },
-                    variant_index: variant.originalIndex
-                }, metricsContainer);
-            
-            });
-    
-        }
-    
-    function renderMetrics(data, container) {
+    } catch (error) {
 
-        const metrics = data.metrics;
-        const solver = data.solver;
-    
-        const div = document.createElement("div");
-        div.classList.add("metrics-card");
-    
-        div.innerHTML = `
+        console.error("Generate Layout Failed", error);
 
-        <div class="metrics-title">
-            Variant #${data.variant_index || ""} 
-        </div>
-    
-        <div class="metrics-grid">
-    
-            <div class="metric-card">
-                <div class="metric-label">Efficiency</div>
-                <div class="metric-value">${(metrics.packing_efficiency * 100).toFixed(1)}%</div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">Width</div>
-                <div class="metric-value">${data.boundary.width.toFixed(1)} m</div>
-            </div>
-    
-            <div class="metric-card">
-                <div class="metric-label">Height</div>
-                <div class="metric-value">${data.boundary.height.toFixed(1)} m</div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">Gross Area</div>
-                <div class="metric-value">${metrics.gross_floor_area.toFixed(1)} m²</div>
-            </div>
-    
-            <div class="metric-card">
-                <div class="metric-label">Net Area</div>
-                <div class="metric-value">${metrics.net_floor_area.toFixed(1)} m²</div>
-            </div>  
-    
-            <div class="metric-card">
-                <div class="metric-label">Private</div>
-                <div class="metric-value">${metrics.private_area.toFixed(1)} m²</div>
-            </div>
-    
-            <div class="metric-card">
-                <div class="metric-label">Common</div>
-                <div class="metric-value">${metrics.common_area.toFixed(1)} m²</div>
-            </div>
-    
-            <div class="metric-card">
-                <div class="metric-label">Private Ratio</div>
-                <div class="metric-value">${(metrics.private_ratio * 100).toFixed(1)}%</div>
-            </div>
-    
-            <div class="metric-card">
-                <div class="metric-label">Common Ratio</div>
-                <div class="metric-value">${(metrics.common_ratio * 100).toFixed(1)}%</div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">Profile</div>
-                <div class="metric-value">${solver.selected_profile}</div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">Rotation</div>
-                <div class="metric-value">${solver.rotation}</div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">Sort</div>
-                <div class="metric-value">${solver.sort_strategy}</div>
-            </div>
-        
-        </div>
-    
-    `;
-    
-        container.appendChild(div);
     }
 
-
-    function setupTabs() {
-
-        const buttons = document.querySelectorAll(".tab-button");
-        const panels = document.querySelectorAll(".tab-panel");
-    
-        buttons.forEach(button => {
-    
-            button.addEventListener("click", () => {
-    
-                const tab = button.dataset.tab;
-    
-                // reset
-                buttons.forEach(b => b.classList.remove("active"));
-                panels.forEach(p => p.classList.remove("active"));
-    
-                // activate
-                button.classList.add("active");
-                document.getElementById(tab).classList.add("active");
-    
-            });
-    
-        });
-    
-    }
-
-    function setupParameterControls() {
-
-        const button = document.getElementById("generate-layout");
-    
-        button.addEventListener("click", () => {
-    
-            const params = {
-    
-                boundary: {
-                    width: parseFloat(document.getElementById("boundary-width").value),
-                    height: parseFloat(document.getElementById("boundary-height").value)
-                },
-    
-                program: {
-                    living_room: {
-                        target: parseFloat(document.getElementById("living-target").value),
-                        min: parseFloat(document.getElementById("living-min").value)
-                    },
-                    kitchen: {
-                        target: parseFloat(document.getElementById("kitchen-target").value),
-                        min: parseFloat(document.getElementById("kitchen-min").value)
-                    },
-                    bedroom_1: {
-                        target: parseFloat(document.getElementById("bed1-target").value),
-                        min: parseFloat(document.getElementById("bed1-min").value)
-                    },
-                    bedroom_2: {
-                        target: parseFloat(document.getElementById("bed2-target").value),
-                        min: parseFloat(document.getElementById("bed2-min").value)
-                    },
-                    bathroom_1: {
-                        target: parseFloat(document.getElementById("bath1-target").value),
-                        min: parseFloat(document.getElementById("bath1-min").value)
-                    },
-                    bathroom_2: {
-                        target: parseFloat(document.getElementById("bath2-target").value),
-                        min: parseFloat(document.getElementById("bath2-min").value)
-                    },
-                    circulation: {
-                        target: parseFloat(document.getElementById("circ-target").value),
-                        min: parseFloat(document.getElementById("circ-min").value)
-                    }
-                }
-    
-            };
-    
-            console.log("FULL PARAMETERS:", params);
-    
-            // 🔥 NEXT: apply to layout
-        });
-    
-    }
+}
 
 window.addEventListener("resize", () => {
 
