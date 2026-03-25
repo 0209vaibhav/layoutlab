@@ -709,6 +709,59 @@ function _renderLayout(data, svgOverride = null) {
     
     }
 
+    function setupParameterControls() {
+
+        const button = document.getElementById("generate-layout");
+    
+        button.addEventListener("click", () => {
+    
+            const params = {
+    
+                boundary: {
+                    width: parseFloat(document.getElementById("boundary-width").value),
+                    height: parseFloat(document.getElementById("boundary-height").value)
+                },
+    
+                program: {
+                    living_room: {
+                        target: parseFloat(document.getElementById("living-target").value),
+                        min: parseFloat(document.getElementById("living-min").value)
+                    },
+                    kitchen: {
+                        target: parseFloat(document.getElementById("kitchen-target").value),
+                        min: parseFloat(document.getElementById("kitchen-min").value)
+                    },
+                    bedroom_1: {
+                        target: parseFloat(document.getElementById("bed1-target").value),
+                        min: parseFloat(document.getElementById("bed1-min").value)
+                    },
+                    bedroom_2: {
+                        target: parseFloat(document.getElementById("bed2-target").value),
+                        min: parseFloat(document.getElementById("bed2-min").value)
+                    },
+                    bathroom_1: {
+                        target: parseFloat(document.getElementById("bath1-target").value),
+                        min: parseFloat(document.getElementById("bath1-min").value)
+                    },
+                    bathroom_2: {
+                        target: parseFloat(document.getElementById("bath2-target").value),
+                        min: parseFloat(document.getElementById("bath2-min").value)
+                    },
+                    circulation: {
+                        target: parseFloat(document.getElementById("circ-target").value),
+                        min: parseFloat(document.getElementById("circ-min").value)
+                    }
+                }
+    
+            };
+    
+            console.log("FULL PARAMETERS:", params);
+    
+            // 🔥 NEXT: apply to layout
+        });
+    
+    }
+
 window.addEventListener("resize", () => {
 
     if (currentLayoutData) {
@@ -721,3 +774,4 @@ setupCanvasInteractions();
 setupLegendInteractions();
 setupTabs();
 loadLayout();
+setupParameterControls();
