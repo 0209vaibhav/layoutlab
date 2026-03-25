@@ -12,6 +12,7 @@
 
         <div class="side-panel">
 
+            <!-- PANEL TITLE -->
             <div class="panel-title">
                 Cedar Floor Planner
                 <div class="panel-subtitle">Computational Layout Tool</div>
@@ -25,7 +26,7 @@
                 <button class="tab-button" data-tab="variants">Variants</button>
             </div>
         
-            <!-- Tab Content -->
+            <!-- TAB CONTENT -->
             <div class="tab-content">
         
                 <!-- INFO -->
@@ -188,12 +189,28 @@
         
                 <!-- VARIANTS -->
                 <div class="tab-panel" id="variants">
-                    <div class="tab-placeholder">Variants panel (coming soon)</div>
+
+                    <div class="variants-header">
+                        <div class="variants-title-row">
+                            <h4>Layout Variants</h4>
+                            <button id="compare-toggle" class="compare-button">
+                                Compare
+                            </button>
+                        </div>
+                    
+                        <p class="variants-subtitle">
+                            Sorted by packing efficiency (best → worst)
+                        </p>
+                    </div>
+                
+                    <div id="variant-grid"></div>
+                
                 </div>
-        </div>    
+            </div>    
     
         </div>
-    
+
+        <!-- CANVAS PANEL -->
         <div class="canvas-panel">
             <div class="canvas-controls">
                 <button id="zoom-in" class="control-button">+</button>
@@ -205,15 +222,6 @@
             </div>
             
             <div id="metrics-container"></div>
-        </div>
-
-        <div class="variant-panel">
-            <div class="variant-header">
-                <h3 class="variant-title">Layout Variants</h3>
-                <p class="variant-subtitle">Sorted by packing efficiency (best → worst)</p>
-                <button id="compare-toggle">Compare</button>
-            </div>
-            <div id="variant-grid"></div>
         </div>
     
     </div>

@@ -13,6 +13,7 @@ let panOriginY = 0;
 let currentLayoutData = null;
 let compareMode = false;
 let compareSelection = [];
+let originalCanvasHTML = null;
 
 function showTooltip(html, event) {
 
@@ -232,18 +233,63 @@ function setupLegendInteractions() {
 
 }
 
-document.getElementById("compare-toggle").addEventListener("click", () => {
+const compareToggle = document.getElementById("compare-toggle");
+
+compareToggle.addEventListener("click", () => {
 
     compareMode = !compareMode;
+
+    compareToggle.classList.toggle("active", compareMode);
+
     compareSelection = [];
 
-    resetView();
-
-    // clear all variant highlights
+    // 🔥 Remove ALL highlights when toggling compare
     document.querySelectorAll(".variant-thumb").forEach(v => {
         v.classList.remove("selected");
         v.classList.remove("compare-selected");
     });
+
+    if (!compareMode && currentLayoutData) {
+
+        const container = document.getElementById("canvas-container");
+
+        if (originalCanvasHTML) {
+            container.innerHTML = originalCanvasHTML;
+        } else {
+            resetSingleLayout();
+        }
+
+        resetView();
+
+        const best = currentLayoutData.variants[0];
+
+        // 🔥 Restore best highlight
+        const firstVariant = document.querySelector(".variant-thumb");
+        if (firstVariant) {
+            firstVariant.classList.add("compare-selected");
+        }
+
+        renderLayout({
+            boundary: currentLayoutData.boundary,
+            rooms: best.rooms
+        });
+
+        const metricsContainer = document.getElementById("metrics-container");
+        metricsContainer.innerHTML = "";
+
+        renderMetrics({
+            boundary: currentLayoutData.boundary,
+            metrics: best.metrics,
+            solver: {
+                selected_profile: best.profile,
+                rotation: best.rotation,
+                sort_strategy: best.sort_strategy,
+                variants_tested: currentLayoutData.variants.length
+            },
+            variant_index: 1
+        }, metricsContainer);
+
+    }
 
 });
 
@@ -425,8 +471,6 @@ function renderLayout(data, svgOverride = null) {
 
 function _renderLayout(data, svgOverride = null) {
 
-    currentLayoutData = data;
-
     const svg = svgOverride || document.getElementById("floorplan");
     if (!svg) return;
 
@@ -542,12 +586,30 @@ function _renderLayout(data, svgOverride = null) {
         applyViewTransform();
     }
 }
+
+function resetSingleLayout() {
+
+    const container = document.getElementById("canvas-container");
+
+    container.innerHTML = `
+        <svg id="floorplan"></svg>
+    `;
+
+    resetView();
+
+}
     
 function renderComparison(boundary, variants) {
 
     resetView();
 
-    const container = document.getElementById("canvas-container");    
+    const container = document.getElementById("canvas-container");
+
+    // Save original canvas
+    if (!originalCanvasHTML) {
+        originalCanvasHTML = container.innerHTML;
+    }
+
     container.innerHTML = "";
 
     const metricsContainer = document.getElementById("metrics-container");
@@ -678,31 +740,6 @@ function renderMetrics(data, container) {
     container.appendChild(div);
 }
 
-function setupTabs() {
-
-    const buttons = document.querySelectorAll(".tab-button");
-    const panels = document.querySelectorAll(".tab-panel");
-
-    buttons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const tab = button.dataset.tab;
-
-            // reset
-            buttons.forEach(b => b.classList.remove("active"));
-            panels.forEach(p => p.classList.remove("active"));
-
-            // activate
-            button.classList.add("active");
-            document.getElementById(tab).classList.add("active");
-
-        });
-
-    });
-
-}
-
 function setupParameterControls() {
 
     const button = document.getElementById("generate-layout");
@@ -776,6 +813,7 @@ async function generateLayout(params) {
         });
 
         const data = await response.json();
+        currentLayoutData = data;
 
         populateParameters(data);
         
@@ -814,6 +852,36 @@ async function generateLayout(params) {
 
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const buttons = document.querySelectorAll(".tab-button");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    buttons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const tab = button.getAttribute("data-tab");
+
+            // Remove active button
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            // Hide panels
+            panels.forEach(panel => panel.classList.remove("active"));
+
+            // Show selected panel
+            const selected = document.getElementById(tab);
+            if (selected) {
+                selected.classList.add("active");
+            }
+
+        });
+
+    });
+
+});
+
 window.addEventListener("resize", () => {
 
     if (currentLayoutData) {
@@ -824,6 +892,5 @@ window.addEventListener("resize", () => {
 
 setupCanvasInteractions();
 setupLegendInteractions();
-setupTabs();
 loadLayout();
 setupParameterControls();
