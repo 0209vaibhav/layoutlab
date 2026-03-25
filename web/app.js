@@ -791,36 +791,30 @@ async function generateLayout(params) {
 
         const data = await response.json();
 
-        // Wrap single layout into variants
-        const wrapped = {
-            boundary: data.boundary,
-            variants: [{
-                rooms: data.rooms,
-                metrics: data.metrics,
-                efficiency: data.metrics.packing_efficiency,
-                profile: "custom",
-                rotation: false,
-                sort_strategy: "custom"
-            }]
-        };
+        // Render variants
+        renderVariants(data);
 
-        renderVariants(wrapped);
+        // Get best variant
+        const best = data.variants[0];
 
+        // Render layout
         renderLayout({
-            boundary: wrapped.boundary,
-            rooms: wrapped.variants[0].rooms
+            boundary: data.boundary,
+            rooms: best.rooms
         });
 
+        // Render metrics
         const metricsContainer = document.getElementById("metrics-container");
         metricsContainer.innerHTML = "";
 
         renderMetrics({
-            boundary: wrapped.boundary,
-            metrics: wrapped.variants[0].metrics,
+            boundary: data.boundary,
+            metrics: best.metrics,
             solver: {
-                selected_profile: "custom",
-                rotation: false,
-                sort_strategy: "custom"
+                selected_profile: best.profile,
+                rotation: best.rotation,
+                sort_strategy: best.sort_strategy,
+                variants_tested: data.variants.length
             },
             variant_index: 1
         }, metricsContainer);

@@ -29,51 +29,76 @@ def generate_layout_api():
         params["boundary"]["height"]
     )
 
-    rooms = load_rooms_from_csv(csv_path)
+    variants = []
 
-    for room in rooms:
-        if room.name in params["program"]:
-            program = params["program"][room.name]
+    profiles = ["compact", "balanced", "generous"]
+    rotations = [False, True]
+    sorts = ["area_desc", "area_asc"]
 
-            if program["target"]:
-                room.target_area = program["target"]
+    for profile in profiles:
+        for rotation in rotations:
+            for sort in sorts:
 
-            if program["min"]:
-                room.min_area = program["min"]
+                rooms = load_rooms_from_csv(csv_path, profile=profile)
 
-    packed = pack_rooms(boundary, rooms)
+                # Override user parameters
+                for room in rooms:
+                    if room.name in params["program"]:
+                        program = params["program"][room.name]
 
-    layout = Layout(boundary, packed)
+                        if program["target"]:
+                            room.target_area = program["target"]
 
-    # -------------------------
-    # THIS PART MUST BE INDENTED
-    # -------------------------
+                        if program["min"]:
+                            room.min_area = program["min"]
 
-    rooms_data = []
+                config = {
+                    "rotation": rotation,
+                    "sort_strategy": sort
+                }
 
-    for room in layout.rooms:
-        rooms_data.append({
-            "name": room.name,
-            "type": room.room_type,
-            "category": room.category,
-            "target_area": room.target_area,
-            "minimum_area": room.min_area,
-            "computed_area": room.area(),
-            "geometry": build_room_geometry(room)
-        })
+                packed = pack_rooms(boundary, rooms, config=config)
+
+                layout = Layout(boundary, packed)
+
+                rooms_data = []
+
+                for room in layout.rooms:
+                    rooms_data.append({
+                        "name": room.name,
+                        "type": room.room_type,
+                        "category": room.category,
+                        "target_area": room.target_area,
+                        "minimum_area": room.min_area,
+                        "computed_area": room.area(),
+                        "geometry": build_room_geometry(room)
+                    })
+
+                variant = {
+                    "rooms": rooms_data,
+                    "metrics": {
+                        "gross_floor_area": layout.boundary.area(),
+                        "net_floor_area": layout.net_floor_area(),
+                        "private_area": layout.private_area(),
+                        "common_area": layout.common_area(),
+                        "packing_efficiency": layout.packing_efficiency(),
+                        "private_ratio": layout.private_area() / layout.net_floor_area() if layout.net_floor_area() else 0,
+                        "common_ratio": layout.common_area() / layout.net_floor_area() if layout.net_floor_area() else 0
+                    },
+                    "profile": profile,
+                    "rotation": rotation,
+                    "sort_strategy": sort,
+                    "efficiency": layout.packing_efficiency()
+                }
+
+                variants.append(variant)
+
+    # Sort best → worst
+    variants.sort(key=lambda v: v["efficiency"], reverse=True)
 
     output = {
-        "boundary": layout.boundary.to_dict(),
-        "rooms": rooms_data,
-        "metrics": {
-            "gross_floor_area": layout.boundary.area(),
-            "net_floor_area": layout.net_floor_area(),
-            "private_area": layout.private_area(),
-            "common_area": layout.common_area(),
-            "packing_efficiency": layout.packing_efficiency(),
-            "private_ratio": layout.private_area() / layout.net_floor_area() if layout.net_floor_area() else 0,
-            "common_ratio": layout.common_area() / layout.net_floor_area() if layout.net_floor_area() else 0
-        }
+        "boundary": boundary.to_dict(),
+        "variants": variants
     }
 
     return jsonify(output)
