@@ -1,4 +1,4 @@
-# Cedar Floor Planner Challenge
+# LayoutLab
 
 This project implements a computational floor planning system that packs a program of rooms into a rectangular boundary.
 It reads a room program from CSV, generates multiple packing variants, selects the best layout based on spatial efficiency, exports the result to JSON, and visualizes the layout in a web dashboard.
