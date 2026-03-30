@@ -804,7 +804,7 @@ async function generateLayout(params) {
 
     try {
 
-        const response = await fetch("http://localhost:8000/generate-layout", {
+        const response = await fetch("https://layoutlab-api.onrender.com/generate-layout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
