@@ -12,65 +12,52 @@
 
         <div class="side-panel">
 
-            <!-- PANEL TITLE -->
             <div class="panel-title">
                 LayoutLab
                 <div class="panel-subtitle">Computational Floor Planning Tool</div>
             </div>
-        
-            <!-- Tabs -->
+
             <div class="tabs">
                 <button class="tab-button active" data-tab="info">Info</button>
                 <button class="tab-button" data-tab="parameters">Parameters</button>
                 <button class="tab-button" data-tab="adjacency">Adjacency</button>
                 <button class="tab-button" data-tab="variants">Variants</button>
             </div>
-        
-            <!-- TAB CONTENT -->
+
             <div class="tab-content">
-        
+
                 <!-- INFO -->
                 <div class="tab-panel active" id="info">
-        
+
                     <div class="Info-Text">
                         <h4>Concept</h4>
-                        <p>LayoutLab is an interactive computational floor planning tool that generates and compares spatial layouts within a defined boundary. It visualizes program areas as configurable blocks, allowing users to explore spatial efficiency, proportions, and alternatives. The system helps designers quickly evaluate planning strategies without relying on traditional CAD workflows or manual layout iteration.</p>
-        
+                        <p>LayoutLab is an interactive computational floor planning tool that generates and compares spatial layouts within a defined boundary. It visualizes program areas as configurable blocks, allowing users to explore spatial efficiency, proportions, and alternatives.</p>
+
                         <h4>Methods and Tools</h4>
-                        <p>The system combines Python-based layout generation with a web visualization interface. A rectangle packing solver produces layout variants from adjustable program parameters, while SVG rendering enables interactive zoom, comparison, and analysis. Layout metrics and solver configurations are evaluated dynamically, supporting rapid design exploration through configurable geometry, variant comparison, and real-time feedback.</p>
+                        <p>The system combines Python-based layout generation with a web visualization interface. A rectangle packing solver produces layout variants from adjustable program parameters, while SVG rendering enables interactive zoom, comparison, and analysis.</p>
                     </div>
 
                     <div class="repo-section">
                         <h4>Repository</h4>
-                        <p>
-                            View the project source code, documentation, and contribute to development:
-                        </p>
-                        <a 
-                        href="https://github.com/0209vaibhav/layoutlab"
-                        target="_blank"
-                        class="repo-button"
-                    >
-                        View on GitHub
-                    </a>
+                        <p>View the project source code, documentation, and contribute to development:</p>
+                        <a href="https://github.com/0209vaibhav/layoutlab" target="_blank" class="repo-button">View on GitHub</a>
                     </div>
-        
+
                     <div class="card">
                         <h3>Legend</h3>
                         <hr>
-        
                         <div class="legend-row" data-category="common">
                             <span class="legend-box common-box"></span>
                             <span>Common Spaces</span>
                         </div>
-        
                         <div class="legend-row" data-category="private">
                             <span class="legend-box private-box"></span>
                             <span>Private Spaces</span>
                         </div>
                     </div>
-        
+
                 </div>
-        
+
                 <!-- PARAMETERS -->
                 <div class="tab-panel" id="parameters">
 
@@ -80,148 +67,168 @@
                         <div class="param-section">
                             <h4>Boundary</h4>
 
-                            <div class="param-group">
-                                <div class="param-label">
-                                    <span>Width (m)</span>
-                                    <span>Length (m)</span>
+                            <div class="boundary-row">
+
+                                <div class="slider-field">
+                                    <label>Width <span id="bw-val">15 m</span></label>
+                                    <div class="single-track">
+                                        <div class="track-bg"></div>
+                                        <div class="track-fill" id="bw-fill"></div>
+                                        <input type="range" id="boundary-width" min="5" max="50" step="1" value="15">
+                                    </div>
+                                    <div class="bound-labels"><span>5 m</span><span>50 m</span></div>
                                 </div>
 
-                                <div class="param-inputs">
-                                    <input type="number" id="boundary-width" value="15">
-                                    <input type="number" id="boundary-height" value="10">
+                                <div class="slider-field">
+                                    <label>Length <span id="bh-val">10 m</span></label>
+                                    <div class="single-track">
+                                        <div class="track-bg"></div>
+                                        <div class="track-fill" id="bh-fill"></div>
+                                        <input type="range" id="boundary-height" min="5" max="50" step="1" value="10">
+                                    </div>
+                                    <div class="bound-labels"><span>5 m</span><span>50 m</span></div>
                                 </div>
+
                             </div>
                         </div>
-
 
                         <!-- Program Areas -->
                         <div class="param-section">
                             <h4>Program Areas</h4>
 
-                            <div class="param-group">
-                                <div class="param-title">Living Room</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Living Room -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Living Room</span>
+                                    <span class="room-range-val"><span id="living_room-lo">20</span>–<span id="living_room-hi">25</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="living-target">
-                                    <input type="number" id="living-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="living_room-fill"></div>
+                                    <input type="range" id="living-min" min="15" max="50" step="1" value="20">
+                                    <input type="range" id="living-target" min="15" max="50" step="1" value="25">
                                 </div>
+                                <div class="range-labels"><span>15 m²</span><span>min → target</span><span>50 m²</span></div>
                             </div>
 
-
-                            <div class="param-group">
-                                <div class="param-title">Kitchen</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Kitchen -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Kitchen</span>
+                                    <span class="room-range-val"><span id="kitchen-lo">9</span>–<span id="kitchen-hi">12</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="kitchen-target">
-                                    <input type="number" id="kitchen-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="kitchen-fill"></div>
+                                    <input type="range" id="kitchen-min" min="5" max="30" step="1" value="9">
+                                    <input type="range" id="kitchen-target" min="5" max="30" step="1" value="12">
                                 </div>
+                                <div class="range-labels"><span>5 m²</span><span>min → target</span><span>30 m²</span></div>
                             </div>
 
-
-                            <div class="param-group">
-                                <div class="param-title">Bedroom 1</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Bedroom 1 -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Bedroom 1</span>
+                                    <span class="room-range-val"><span id="bedroom_1-lo">12</span>–<span id="bedroom_1-hi">14</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="bedroom1-target">
-                                    <input type="number" id="bedroom1-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="bedroom_1-fill"></div>
+                                    <input type="range" id="bedroom1-min" min="8" max="30" step="1" value="12">
+                                    <input type="range" id="bedroom1-target" min="8" max="30" step="1" value="14">
                                 </div>
+                                <div class="range-labels"><span>8 m²</span><span>min → target</span><span>30 m²</span></div>
                             </div>
 
-
-                            <div class="param-group">
-                                <div class="param-title">Bedroom 2</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Bedroom 2 -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Bedroom 2</span>
+                                    <span class="room-range-val"><span id="bedroom_2-lo">10</span>–<span id="bedroom_2-hi">12</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="bedroom2-target">
-                                    <input type="number" id="bedroom2-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="bedroom_2-fill"></div>
+                                    <input type="range" id="bedroom2-min" min="8" max="30" step="1" value="10">
+                                    <input type="range" id="bedroom2-target" min="8" max="30" step="1" value="12">
                                 </div>
+                                <div class="range-labels"><span>8 m²</span><span>min → target</span><span>30 m²</span></div>
                             </div>
 
-
-                            <div class="param-group">
-                                <div class="param-title">Bathroom 1</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Bathroom 1 -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Bathroom 1</span>
+                                    <span class="room-range-val"><span id="bathroom_1-lo">4</span>–<span id="bathroom_1-hi">5</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="bathroom1-target">
-                                    <input type="number" id="bathroom1-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="bathroom_1-fill"></div>
+                                    <input type="range" id="bathroom1-min" min="2" max="15" step="1" value="4">
+                                    <input type="range" id="bathroom1-target" min="2" max="15" step="1" value="5">
                                 </div>
+                                <div class="range-labels"><span>2 m²</span><span>min → target</span><span>15 m²</span></div>
                             </div>
 
-
-                            <div class="param-group">
-                                <div class="param-title">Bathroom 2</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Bathroom 2 -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Bathroom 2</span>
+                                    <span class="room-range-val"><span id="bathroom_2-lo">3</span>–<span id="bathroom_2-hi">4</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="bathroom2-target">
-                                    <input type="number" id="bathroom2-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="bathroom_2-fill"></div>
+                                    <input type="range" id="bathroom2-min" min="2" max="15" step="1" value="3">
+                                    <input type="range" id="bathroom2-target" min="2" max="15" step="1" value="4">
                                 </div>
+                                <div class="range-labels"><span>2 m²</span><span>min → target</span><span>15 m²</span></div>
                             </div>
 
-
-                            <div class="param-group">
-                                <div class="param-title">Circulation</div>
-                                <div class="param-label">
-                                    <span>Target Area (m²)</span>
-                                    <span>Min Area (m²)</span>
+                            <!-- Circulation -->
+                            <div class="room-block">
+                                <div class="room-header">
+                                    <span class="room-name">Circulation</span>
+                                    <span class="room-range-val"><span id="circulation-lo">5</span>–<span id="circulation-hi">8</span> m²</span>
                                 </div>
-                                <div class="param-inputs">
-                                    <input type="number" id="circulation-target">
-                                    <input type="number" id="circulation-min">
+                                <div class="dual-track">
+                                    <div class="track-bg"></div>
+                                    <div class="track-fill" id="circulation-fill"></div>
+                                    <input type="range" id="circulation-min" min="3" max="20" step="1" value="5">
+                                    <input type="range" id="circulation-target" min="3" max="20" step="1" value="8">
                                 </div>
+                                <div class="range-labels"><span>3 m²</span><span>min → target</span><span>20 m²</span></div>
                             </div>
 
                         </div>
-
                     </div>
 
                     <button id="generate-layout">Generate Layout</button>
 
                 </div>
-        
+
                 <!-- ADJACENCY -->
                 <div class="tab-panel" id="adjacency">
                     <div class="tab-placeholder">Adjacency panel (coming soon)</div>
                 </div>
-        
+
                 <!-- VARIANTS -->
                 <div class="tab-panel" id="variants">
 
                     <div class="variants-header">
                         <div class="variants-title-row">
                             <h4>Layout Variants</h4>
-                            <button id="compare-toggle" class="compare-button">
-                                Compare
-                            </button>
+                            <button id="compare-toggle" class="compare-button">Compare</button>
                         </div>
-                    
-                        <p class="variants-subtitle">
-                            Sorted by packing efficiency (best → worst)
-                        </p>
+                        <p class="variants-subtitle">Sorted by packing efficiency (best → worst)</p>
                     </div>
-                
+
                     <div id="variant-grid"></div>
-                
+
                 </div>
-            </div>    
-    
+            </div>
+
         </div>
 
         <!-- CANVAS PANEL -->
@@ -234,14 +241,13 @@
             <div id="canvas-container">
                 <svg id="floorplan"></svg>
             </div>
-            
             <div id="metrics-container"></div>
         </div>
-    
+
     </div>
-    
+
     <div id="tooltip"></div>
     <script src="app.js"></script>
-    
-    </body>
+
+</body>
 </html>

@@ -53,7 +53,7 @@ body {
 .dashboard {
     display: flex;
     gap: 30px;
-    height: calc(100vh - 60px); 
+    height: calc(100vh - 60px);
     margin-top: 30px;
 }
 
@@ -79,18 +79,6 @@ body {
     justify-content: flex-start;
     overflow: hidden;
     border: 1px solid rgb(200, 200, 200);
-}
-
-.canvas-note {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-    font-size: 10px;
-    color: hsl(0, 0%, 75%);
-    line-height: 1.4;
-    margin: 0;
-    pointer-events: none;
-    font-style:italic;
 }
 
 .canvas-controls {
@@ -122,17 +110,10 @@ body {
 .card {
     background: white;
     border-radius: 0px;
-
     background-color: #ffffff;
 }
 
-.card.metrics-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.card:last-child{
+.card:last-child {
     flex: 1;
 }
 
@@ -253,14 +234,6 @@ METRICS DASHBOARD
     color: #222;
 }
 
-.metrics-meta {
-    margin-top: 10px;
-    font-size: 11px;
-    color: #666;
-    display: flex;
-    gap: 12px;
-}
-
 .metric-card:hover {
     border-color: #999;
 }
@@ -285,16 +258,10 @@ METRICS DASHBOARD
     transition: opacity 0.15s ease;
 }
 
-.info-icon {
-    margin-left: 6px;
-    cursor: help;
-    color: #888;
-    font-size: 13px;
-}
-
 /* ---------------------------
-VARIANT PANEL (RIGHT SIDE)
+VARIANT PANEL
 --------------------------- */
+
 .variants-title-row {
     display: flex;
     justify-content: space-between;
@@ -314,10 +281,6 @@ VARIANT PANEL (RIGHT SIDE)
     color: #222;
     letter-spacing: 0.02em;
     margin: 0px;
-}
-
-#variant-note {
-    font-size: 10px;
 }
 
 #variant-grid {
@@ -347,7 +310,7 @@ VARIANT PANEL (RIGHT SIDE)
 }
 
 .variant-thumb:hover {
-    border: 2px solid rgba(0, 0, 0, 0.35)
+    border: 2px solid rgba(0, 0, 0, 0.35);
 }
 
 .variant-thumb svg {
@@ -390,7 +353,6 @@ VARIANT PANEL (RIGHT SIDE)
     background: #222;
     color: white;
     border-color: #222;
-
 }
 
 #canvas-container {
@@ -405,7 +367,7 @@ VARIANT PANEL (RIGHT SIDE)
 .compare-canvas {
     flex: 1;
     width: 100%;
-    height:100%;
+    height: 100%;
     display: block;
 }
 
@@ -435,8 +397,6 @@ VARIANT PANEL (RIGHT SIDE)
 .compare-selected {
     border: 2px solid black;
 }
-
-
 
 #metrics-container {
     display: flex;
@@ -510,14 +470,15 @@ TAB CONTENT
     display: none;
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .tab-panel.active {
     display: block;
 }
-
-/* Placeholder content */
 
 .tab-placeholder {
     padding: 20px;
@@ -526,62 +487,225 @@ TAB CONTENT
 }
 
 /* ---------------------------
-PARAMETERS PANEL (UNIFIED)
+PARAMETERS PANEL
 --------------------------- */
 
 .parameters-content {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
-
-/* Section headers */
 
 .param-section h4 {
     font-size: 13px;
-    margin-bottom: 6px;
-}
-
-/* Shared Param System */
-
-.param-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
     margin-bottom: 12px;
 }
 
-.param-title {
-    font-size: 12px;
-    font-weight: 600;
+/* Boundary row */
+
+.boundary-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 4px;
 }
 
-.param-label {
+.slider-field {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.slider-field label {
+    font-size: 11px;
+    color: #666;
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.slider-field label span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #222;
+}
+
+/* Single-handle track (boundary) */
+
+.single-track {
+    position: relative;
+    height: 28px;
+    margin-bottom: 2px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.single-track .track-bg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.single-track .track-fill {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 3px;
+    background: #222;
+    border-radius: 2px;
+}
+
+.single-track input[type=range] {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 28px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.single-track input[type=range]::-webkit-slider-runnable-track {
+    height: 0;
+}
+
+.single-track input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #222;
+    cursor: pointer;
+    margin-top: -7px;
+}
+
+.single-track input[type=range]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #222;
+    cursor: pointer;
+}
+
+/* Dual-handle track (room areas) */
+
+.room-block {
+    margin-bottom: 18px;
+}
+
+.room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.room-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #222;
+}
+
+.room-range-val {
     font-size: 11px;
     color: #666;
 }
 
-.param-label span {
-    width: 50%;
+.room-range-val span {
+    color: #222;
+    font-weight: 500;
 }
 
-/* Inputs */
-
-.param-inputs {
-    display: flex;
-    gap: 6px;
-}
-
-.param-inputs input {
-    width: 50%;
-    min-width: 0;
-    padding: 4px;
-    border: 1px solid #ccc;
-    font-size: 12px;
+.dual-track {
+    position: relative;
+    height: 28px;
+    margin-bottom: 2px;
+    width: 100%;
     box-sizing: border-box;
 }
 
-/* Generate button fixed bottom */
+.dual-track .track-bg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.dual-track .track-fill {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3px;
+    background: #222;
+    border-radius: 2px;
+}
+
+.dual-track input[type=range] {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 28px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    pointer-events: none;
+}
+
+.dual-track input[type=range]::-webkit-slider-runnable-track {
+    height: 0;
+}
+
+.dual-track input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #222;
+    pointer-events: all;
+    cursor: pointer;
+    margin-top: -7px;
+}
+
+.dual-track input[type=range]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #222;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+/* Shared bound/range labels */
+
+.bound-labels,
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* Generate button */
 
 #generate-layout {
     margin-top: 20px;
@@ -621,19 +745,6 @@ REPOSITORY LINK
 
 .repo-section p {
     margin-top: 0px;
-}
-
-.repo-link {
-    display: block;
-    margin-top: 6px;
-    color: #2a6df4;
-    text-decoration: none;
-    font-size: 12px;
-    word-break: break-word;
-}
-
-.repo-link:hover {
-    text-decoration: underline;
 }
 
 .repo-button {
