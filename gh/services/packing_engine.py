@@ -82,11 +82,12 @@ def pack_rooms(boundary, rooms, config=None):
     # pack
     packer.pack()
 
-    # assign packed positions
+    # assign packed positions and actual dimensions (rectpack may have rotated a room)
     for rect in packer.rect_list():
 
         _, x, y, w, h, rid = rect
 
         rooms[rid].set_position(x, y)
+        rooms[rid].set_dimensions(w, h)
 
     return rooms

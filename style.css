@@ -608,7 +608,6 @@ PARAMETERS PANEL
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 8px;
 }
 
 .room-name {

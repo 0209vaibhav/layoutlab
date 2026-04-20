@@ -13,3 +13,6 @@ exports/layout.json
 
 # Rhino temp
 *.3dm.autosave
+
+# Claude Code
+.claude/
