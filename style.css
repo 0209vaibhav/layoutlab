@@ -762,6 +762,84 @@ REPOSITORY LINK
 }
 
 /* ---------------------------
+INFO PANEL
+--------------------------- */
+
+.info-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-section:last-child {
+    border-bottom: none;
+}
+
+.info-section p {
+    font-size: 12px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin: 6px 0 10px 0;
+    text-align: justify;
+}
+
+.info-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.info-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.info-link {
+    display: inline-block;
+    font-size: 11px;
+    color: #222;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 3px;
+}
+
+.info-link:hover {
+    background: #f3f3f3;
+}
+
+/* ---------------------------
+CANVAS LEGEND OVERLAY
+--------------------------- */
+
+.canvas-legend {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.canvas-legend .legend-row {
+    margin: 0;
+    cursor: default;
+}
+
+.canvas-legend .legend-row:hover {
+    font-weight: 400;
+}
+
+/* ---------------------------
 LOADING OVERLAY
 --------------------------- */
 
