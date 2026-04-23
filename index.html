@@ -29,31 +29,34 @@
                 <!-- INFO -->
                 <div class="tab-panel active" id="info">
 
-                    <div class="Info-Text">
-                        <h4>Concept</h4>
-                        <p>LayoutLab is an interactive computational floor planning tool that generates and compares spatial layouts within a defined boundary. It visualizes program areas as configurable blocks, allowing users to explore spatial efficiency, proportions, and alternatives.</p>
-
-                        <h4>Methods and Tools</h4>
-                        <p>The system combines Python-based layout generation with a web visualization interface. A rectangle packing solver produces layout variants from adjustable program parameters, while SVG rendering enables interactive zoom, comparison, and analysis.</p>
+                    <div class="info-section">
+                        <div class="info-tag">What</div>
+                        <p>LayoutLab is a computational floor planning tool that generates and compares spatial layout variants within a user-defined boundary. It visualizes program areas as configurable room blocks, letting you explore spatial efficiency, proportions, and alternatives side by side.</p>
                     </div>
 
-                    <div class="repo-section">
-                        <h4>Repository</h4>
-                        <p>View the project source code, documentation, and contribute to development:</p>
-                        <a href="https://github.com/0209vaibhav/layoutlab" target="_blank" class="repo-button">View on GitHub</a>
+                    <div class="info-section">
+                        <div class="info-tag">Why</div>
+                        <p>Early-stage architectural design involves exploring many possible spatial configurations. LayoutLab automates this — generating multiple valid layouts from adjustable room area ranges, so designers can quickly evaluate options without manual trial and error.</p>
                     </div>
 
-                    <div class="card">
-                        <h3>Legend</h3>
-                        <hr>
-                        <div class="legend-row" data-category="common">
-                            <span class="legend-box common-box"></span>
-                            <span>Common Spaces</span>
+                    <div class="info-section">
+                        <div class="info-tag">How</div>
+                        <p>Room areas are sampled within user-defined min–target ranges and packed into a boundary using a rectangle packing algorithm. A Python backend (Flask + rectpack) hosted on Render returns 12 layout variants per request. The frontend renders them as interactive SVGs with zoom, compare, and metrics.</p>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-tag">Who</div>
+                        <p>Designed and developed by <strong>Vaibhav Jain</strong>.</p>
+                        <div class="info-links">
+                            <a href="https://0209vaibhav.github.io/Website/" target="_blank" class="info-link">Portfolio</a>
+                            <a href="https://www.linkedin.com/in/0209vaibhav/" target="_blank" class="info-link">LinkedIn</a>
                         </div>
-                        <div class="legend-row" data-category="private">
-                            <span class="legend-box private-box"></span>
-                            <span>Private Spaces</span>
-                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-tag">Where</div>
+                        <p>Source code, documentation, and contributions:</p>
+                        <a href="https://github.com/0209vaibhav/layoutlab" target="_blank" class="info-link">GitHub — 0209vaibhav/layoutlab</a>
                     </div>
 
                 </div>
@@ -239,6 +242,18 @@
                 <button id="recenter" class="control-button">⟲</button>
             </div>
             <div id="canvas-container">
+
+                <!-- Persistent legend overlay -->
+                <div class="canvas-legend">
+                    <div class="legend-row" data-category="common">
+                        <span class="legend-box common-box"></span>
+                        <span>Common</span>
+                    </div>
+                    <div class="legend-row" data-category="private">
+                        <span class="legend-box private-box"></span>
+                        <span>Private</span>
+                    </div>
+                </div>
 
                 <!-- Loading overlay -->
                 <div id="loading-overlay">
