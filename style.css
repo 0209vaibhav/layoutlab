@@ -760,3 +760,73 @@ REPOSITORY LINK
 .repo-button:hover {
     background: #f3f3f3;
 }
+
+/* ---------------------------
+LOADING OVERLAY
+--------------------------- */
+
+#loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+#loading-overlay.hidden {
+    display: none;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loading-floorplan {
+    width: 160px;
+    height: 107px;
+    display: block;
+}
+
+/* Rooms pulse in staggered sequence */
+.load-room {
+    stroke: #333;
+    stroke-width: 1;
+    opacity: 0.15;
+    animation: roomPulse 2.4s ease-in-out infinite;
+}
+
+.load-common { fill: #6fbf73; }
+.load-private { fill: #5fa4e8; }
+
+.load-room:nth-child(1) { animation-delay: 0.0s; }
+.load-room:nth-child(2) { animation-delay: 0.2s; }
+.load-room:nth-child(3) { animation-delay: 0.4s; }
+.load-room:nth-child(4) { animation-delay: 0.6s; }
+.load-room:nth-child(5) { animation-delay: 0.8s; }
+.load-room:nth-child(6) { animation-delay: 1.0s; }
+.load-room:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes roomPulse {
+    0%   { opacity: 0.15; }
+    40%  { opacity: 0.85; }
+    80%  { opacity: 0.15; }
+    100% { opacity: 0.15; }
+}
+
+.loading-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #222;
+    letter-spacing: 0.02em;
+}
+
+.loading-sub {
+    font-size: 11px;
+    color: #999;
+    margin-top: -12px;
+}

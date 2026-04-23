@@ -239,6 +239,24 @@
                 <button id="recenter" class="control-button">⟲</button>
             </div>
             <div id="canvas-container">
+
+                <!-- Loading overlay -->
+                <div id="loading-overlay">
+                    <div class="loading-content">
+                        <svg class="loading-floorplan" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="load-room load-common"  x="1"  y="1"  width="57" height="41" rx="1"/>
+                            <rect class="load-room load-common"  x="60" y="1"  width="59" height="19" rx="1"/>
+                            <rect class="load-room load-private" x="60" y="22" width="28" height="20" rx="1"/>
+                            <rect class="load-room load-private" x="90" y="22" width="29" height="20" rx="1"/>
+                            <rect class="load-room load-private" x="1"  y="44" width="22" height="35" rx="1"/>
+                            <rect class="load-room load-private" x="25" y="44" width="22" height="35" rx="1"/>
+                            <rect class="load-room load-common"  x="49" y="44" width="70" height="35" rx="1"/>
+                        </svg>
+                        <div class="loading-label">Generating layouts<span id="loading-dots"></span></div>
+                        <div class="loading-sub">Server is starting up — this may take up to a minute</div>
+                    </div>
+                </div>
+
                 <svg id="floorplan"></svg>
             </div>
             <div id="metrics-container"></div>

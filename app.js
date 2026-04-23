@@ -639,6 +639,17 @@ function setupParameterControls() {
 // ---------------------------
 
 async function generateLayout(params) {
+
+    // Show loading overlay with animated dots
+    const overlay = document.getElementById("loading-overlay");
+    const dotsEl  = document.getElementById("loading-dots");
+    overlay.classList.remove("hidden");
+    let dotsCount = 0;
+    const dotsTimer = setInterval(() => {
+        dotsCount = (dotsCount + 1) % 4;
+        dotsEl.textContent = ".".repeat(dotsCount);
+    }, 500);
+
     try {
         const response = await fetch("https://layoutlab-api.onrender.com/generate-layout", {
             method: "POST",
@@ -671,6 +682,9 @@ async function generateLayout(params) {
 
     } catch (error) {
         console.error("Generate Layout Failed", error);
+    } finally {
+        clearInterval(dotsTimer);
+        overlay.classList.add("hidden");
     }
 }
 
