@@ -17,4 +17,5 @@ exports/layout.json
 # Claude Code
 .claude/
 
-# Media
+# Media (local only)
+media/
